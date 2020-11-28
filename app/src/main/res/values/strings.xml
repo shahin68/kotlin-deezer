@@ -2,4 +2,5 @@
     <string name="app_name">Kotlin Deezer</string>
     <string name="generic_text_found_nothing">Found nothing!</string>
     <string name="search_placeholder_hint_search_for_artist">Search for artists …</string>
+    <string name="generic_action_back">back</string>
 </resources>

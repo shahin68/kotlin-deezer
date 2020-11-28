@@ -3,10 +3,12 @@
     <dimen name="generic_margin_8dp">8dp</dimen>
     <dimen name="generic_margin_16dp">16dp</dimen>
     <dimen name="generic_text_size">16sp</dimen>
-    <dimen name="generic_sticky_header_text_size">20sp</dimen>
+    <dimen name="generic_heading_text_size">18sp</dimen>
+    <dimen name="generic_sticky_header_text_size">22sp</dimen>
     <dimen name="generic_title_text_size">28sp</dimen>
     <dimen name="search_view_start_padding">80sp</dimen>
     <dimen name="search_view_top_padding">2sp</dimen>
     <dimen name="search_view_height">52sp</dimen>
     <dimen name="artist_image_size">60dp</dimen>
+    <dimen name="albums_list_top_padding">64dp</dimen> <!--56dp + 8dp-->
 </resources>

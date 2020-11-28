@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.shahin.deezer.R
 import com.shahin.deezer.databinding.FragmentSearchBinding
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -30,6 +31,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         initObservers()
         viewModel.searchForArtist("Metallica")
 
+        binding.messageTv.setOnClickListener {
+            findNavController().navigate(
+                SearchFragmentDirections.actionFragmentSearchToFragmentAlbums()
+            )
+        }
     }
 
     private fun initObservers() {

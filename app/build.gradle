@@ -89,6 +89,9 @@ dependencies {
     // Paging Library
     implementation('androidx.paging:paging-runtime-ktx:2.1.2')
 
+    // Coil Image Loading Library
+    implementation('io.coil-kt:coil:1.1.0')
+
     // Subtitle supported collapsing toolbar
     implementation 'com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.1.0'
 }

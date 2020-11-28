@@ -18,6 +18,7 @@
             app:collapsedSubtitleTextAppearance="@style/ToolbarSubTitleStyle.Collapsing.Collapsed"
             app:collapsedTitleTextAppearance="@style/ToolbarTitleStyle.Collapsing.Collapsed"
             app:contentScrim="?attr/colorOnPrimary"
+            app:scrimAnimationDuration="100"
             app:expandedSubtitleTextAppearance="@style/ToolbarSubTitleStyle.Collapsing.Expanded"
             app:expandedTitleMargin="@dimen/generic_margin_16dp"
             app:expandedTitleTextAppearance="@style/ToolbarTitleStyle.Collapsing.Expanded"

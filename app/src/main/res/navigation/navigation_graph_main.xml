@@ -30,5 +30,15 @@
         android:name="com.shahin.deezer.ui.fragments.artist.tracks.TracksFragment"
         android:label="Tracks"
         tools:layout="@layout/fragment_tracks">
+        <argument
+            android:name="albumName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="" />
+        <argument
+            android:name="artistName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="" />
     </fragment>
 </navigation>

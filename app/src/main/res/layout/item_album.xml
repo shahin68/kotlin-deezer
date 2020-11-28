@@ -6,7 +6,7 @@
     android:padding="@dimen/generic_margin_8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+        android:id="@+id/album_image_iv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="H,1:1"
@@ -16,7 +16,7 @@
         app:srcCompat="@drawable/ic_placeholder" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/album_title_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -24,10 +24,10 @@
         android:textSize="@dimen/generic_heading_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/album_image_iv" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/album_artist_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -35,6 +35,6 @@
         android:textColor="?attr/colorOnSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/album_title_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

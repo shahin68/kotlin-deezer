@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph_main"
+    app:startDestination="@id/fragmentSearch">
+
+    <fragment
+        android:id="@+id/fragmentSearch"
+        android:name="com.shahin.deezer.ui.fragments.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentAlbums"
+            app:destination="@id/fragmentAlbums" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAlbums"
+        android:name="com.shahin.deezer.ui.fragments.artist.albums.AlbumsFragment"
+        android:label="Albums"
+        tools:layout="@layout/fragment_albums">
+        <action
+            android:id="@+id/action_fragmentAlbums_to_fragmentTracks"
+            app:destination="@id/fragmentTracks" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentTracks"
+        android:name="com.shahin.deezer.ui.fragments.artist.tracks.TracksFragment"
+        android:label="Tracks"
+        tools:layout="@layout/fragment_tracks">
+    </fragment>
+</navigation>

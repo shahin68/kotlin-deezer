@@ -38,4 +38,9 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
         viewModel.fetchAlbums()
     }
 
+    private fun navigateToTracks() {
+        findNavController().navigate(
+            AlbumsFragmentDirections.actionFragmentAlbumsToFragmentTracks()
+        )
+    }
 }

@@ -13,4 +13,42 @@
         <item name="android:textColor">?attr/colorPrimaryDark</item>
         <item name="android:fontFamily">@font/font_bold</item>
     </style>
+
+    <style name="ToolbarSubTitleStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">@dimen/generic_text_size</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:fontFamily">@font/font_regular</item>
+    </style>
+
+    <style name="ToolbarTitleStyle.Collapsing.Expanded" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/generic_sticky_header_text_size</item>
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/font_bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ToolbarTitleStyle.Collapsing.Collapsed" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/generic_text_size</item>
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/font_bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ToolbarSubTitleStyle.Collapsing.Expanded" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">@dimen/generic_heading_text_size</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:fontFamily">@font/font_regular</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ToolbarSubTitleStyle.Collapsing.Collapsed" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">@dimen/generic_text_size</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:fontFamily">@font/font_regular</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 </resources>

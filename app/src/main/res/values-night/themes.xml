@@ -22,6 +22,7 @@
         <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">?attr/colorPrimaryDark</item>
         <item name="android:textSize">@dimen/generic_text_size</item>
+        <item name="colorOnBackground">@color/white_transparent_50p</item>
     </style>
 
     <style name="CardViewStyle" parent="CardView">
@@ -46,6 +47,11 @@
         <item name="navigationIcon">@drawable/ic_back_white</item>
         <item name="background">@color/black_transparent_50p</item>
         <item name="titleTextAppearance">@style/ToolbarTextStyle</item>
+        <item name="subtitleTextAppearance">@style/ToolbarSubTitleStyle</item>
     </style>
 
+    <style name="ToolbarStyle.Collapsing" parent="Widget.MaterialComponents.Toolbar">
+        <item name="navigationIcon">@drawable/ic_back_white</item>
+        <item name="background">@color/black_transparent_50p</item>
+    </style>
 </resources>

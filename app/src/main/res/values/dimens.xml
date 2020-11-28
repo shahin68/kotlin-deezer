@@ -11,4 +11,6 @@
     <dimen name="search_view_height">52sp</dimen>
     <dimen name="artist_image_size">60dp</dimen>
     <dimen name="albums_list_top_padding">64dp</dimen> <!--56dp + 8dp-->
+    <dimen name="tracks_toolbar_image_margin">84dp</dimen>
+    <dimen name="tracks_appbar_size">400dp</dimen>
 </resources>

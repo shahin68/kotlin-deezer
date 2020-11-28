@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shahin.deezer.R
 import com.shahin.deezer.databinding.FragmentTracksBinding
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -26,6 +28,11 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
 
         viewModel.fetchTracks()
     }

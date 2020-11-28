@@ -88,4 +88,7 @@ dependencies {
 
     // Paging Library
     implementation('androidx.paging:paging-runtime-ktx:2.1.2')
+
+    // Subtitle supported collapsing toolbar
+    implementation 'com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.1.0'
 }

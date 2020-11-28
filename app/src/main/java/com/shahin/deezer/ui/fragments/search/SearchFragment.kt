@@ -30,12 +30,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         super.onViewCreated(view, savedInstanceState)
         initObservers()
         viewModel.searchForArtist("Metallica")
-
-        binding.messageTv.setOnClickListener {
-            findNavController().navigate(
-                SearchFragmentDirections.actionFragmentSearchToFragmentAlbums()
-            )
-        }
     }
 
     private fun initObservers() {
@@ -44,4 +38,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         })
     }
 
+    private fun navigateToAlbums() {
+        findNavController().navigate(
+            SearchFragmentDirections.actionFragmentSearchToFragmentAlbums()
+        )
+    }
 }

@@ -13,4 +13,7 @@
     <dimen name="albums_list_top_padding">64dp</dimen> <!--56dp + 8dp-->
     <dimen name="tracks_toolbar_image_margin">84dp</dimen>
     <dimen name="tracks_appbar_size">400dp</dimen>
+    <dimen name="generic_margin_24dp">24dp</dimen>
+    <dimen name="search_fab_size">40dp</dimen>
+    <dimen name="generic_size_24dp">24dp</dimen>
 </resources>

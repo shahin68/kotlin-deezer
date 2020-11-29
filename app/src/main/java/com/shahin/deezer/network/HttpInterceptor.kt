@@ -7,24 +7,39 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
-const val TOKEN_TYPE = "Bearer"
-
 class HttpInterceptor @Inject constructor(
     private val localDataSource: LocalDataSource
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = localDataSource.getApiKey()
-        // adding device locale to api query
         val url = chain.request().url.newBuilder()
             .addQueryParameter("locale", Locale.getDefault().language)
             .build()
         val request = chain.request()
         val requestBuilder = request.newBuilder()
-        // adding token header except for exposed api calls
+
+        /**
+         * Note: add token header except for exposed api calls
+         * Note: if "No-Authentication" is defined in api call
+         * that means we do Not want a token header
+         */
         if (request.header("No-Authentication") == null) {
-            requestBuilder.addHeader("Authorization", "$TOKEN_TYPE $token")
+            requestBuilder.addHeader("access_token", token)
+        } else {
+            requestBuilder.removeHeader("No-Authentication")
         }
-        val newRequest = requestBuilder.url(url).build()
+
+        /**
+         * Note: add locale except for a few select api calls
+         * Note: if "No-Locality" is defined in api call
+         * that means we do Not want to fetch a localized response
+         */
+        if (request.header("No-Locality") == null) {
+            requestBuilder.url(url)
+        } else {
+            requestBuilder.removeHeader("No-Locality")
+        }
+        val newRequest = requestBuilder.build()
         return try {
             chain.proceed(newRequest)
         } catch (e: Exception) {

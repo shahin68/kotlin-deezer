@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class WrapperResponse<T>(
-    @SerializedName("items") val body: T
+    @SerializedName("data") val data: T
 )

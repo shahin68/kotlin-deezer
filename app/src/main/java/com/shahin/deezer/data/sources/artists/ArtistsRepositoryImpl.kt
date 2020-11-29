@@ -1,16 +1,18 @@
 package com.shahin.deezer.data.sources.artists
 
-import com.shahin.deezer.data.models.ArtistModel
+import androidx.paging.PagingData
+import com.shahin.deezer.data.models.search.DataItem
 import com.shahin.deezer.data.sources.artists.local.ArtistsLocalSource
 import com.shahin.deezer.data.sources.artists.remote.ArtistsRemoteSource
-import com.shahin.deezer.network.NetworkResponse
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ArtistsRepositoryImpl @Inject constructor(
     private val artistsLocalSource: ArtistsLocalSource,
     private val artistsRemoteSource: ArtistsRemoteSource
 ) : ArtistsRepository {
-    override suspend fun search(artistName: String): NetworkResponse<List<ArtistModel>> {
+    override fun search(artistName: String): Flow<PagingData<DataItem>> {
         return artistsRemoteSource.search(artistName)
     }
+
 }

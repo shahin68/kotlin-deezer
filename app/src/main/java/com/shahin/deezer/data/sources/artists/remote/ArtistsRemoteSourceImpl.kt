@@ -1,22 +1,26 @@
 package com.shahin.deezer.data.sources.artists.remote
 
-import com.shahin.deezer.data.models.ArtistModel
-import com.shahin.deezer.data.sources.BaseRepository
-import com.shahin.deezer.network.NetworkResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.shahin.deezer.api.ArtistsApi
+import com.shahin.deezer.data.models.search.DataItem
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+private const val NETWORK_PAGE_SIZE = 25
+
 class ArtistsRemoteSourceImpl @Inject constructor(
-    private val artistsApi: ArtistsApi
-): BaseRepository(), ArtistsRemoteSource {
-    override suspend fun search(artistName: String): NetworkResponse<List<ArtistModel>> {
-        return withContext(Dispatchers.IO) {
-            return@withContext networkResponseOf {
-                artistsApi.query(
-                    artistName
-                )
-            }
-        }
+    private val service: ArtistsApi
+) : ArtistsRemoteSource {
+    override fun search(artistName: String): Flow<PagingData<DataItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { ArtistsPagingDataSource(service, artistName) }
+        ).flow
     }
+
 }

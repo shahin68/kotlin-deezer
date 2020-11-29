@@ -1,10 +1,11 @@
 package com.shahin.deezer.data.sources.artists
 
-import com.shahin.deezer.data.models.ArtistModel
-import com.shahin.deezer.network.NetworkResponse
+import androidx.paging.PagingData
+import com.shahin.deezer.data.models.search.DataItem
+import kotlinx.coroutines.flow.Flow
 
 interface ArtistsRepository {
-    suspend fun search(
+    fun search(
         artistName: String
-    ): NetworkResponse<List<ArtistModel>>
+    ): Flow<PagingData<DataItem>>
 }

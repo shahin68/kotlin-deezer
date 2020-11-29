@@ -8,8 +8,8 @@ abstract class BaseFragment<Binding : ViewBinding>(@LayoutRes contentLayoutId: I
     protected var _binding : Binding? = null
     protected  val binding : Binding get() = _binding!!
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDetach() {
+        super.onDetach()
         _binding = null
     }
 

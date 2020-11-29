@@ -26,6 +26,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "String", "BASE_URL", "\"https://api.deezer.com/\""
+        buildConfigField "String", "SECRET", "\"5e2cafdc06b9ef27656bf10691f66ebc\""
     }
 
     buildTypes {
@@ -39,6 +40,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"] // opt in for experimental functions
         jvmTarget = '1.8'
     }
     buildFeatures {
@@ -83,15 +85,18 @@ dependencies {
     implementation('com.squareup.okhttp3:logging-interceptor:4.9.0')
 
     // Kotlin Coroutines
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9')
-    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9')
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1')
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1')
 
     // Paging Library
-    implementation('androidx.paging:paging-runtime-ktx:2.1.2')
+    implementation('androidx.paging:paging-runtime-ktx:3.0.0-alpha09')
 
     // Coil Image Loading Library
     implementation('io.coil-kt:coil:1.1.0')
 
     // Subtitle supported collapsing toolbar
-    implementation 'com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.1.0'
+    implementation('com.hendraanggrian.material:collapsingtoolbarlayout-subtitle:1.1.0')
+
+    // Flow Binding
+    implementation('io.github.reactivecircus.flowbinding:flowbinding-android:0.10.2')
 }

@@ -1,6 +1,6 @@
 package com.shahin.deezer.di
 
-import com.shahin.deezer.data.sources.artists.remote.ArtistsApi
+import com.shahin.deezer.api.ArtistsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

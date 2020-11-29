@@ -4,4 +4,5 @@
     <string name="search_placeholder_hint_search_for_artist">Search for artists …</string>
     <string name="generic_action_back">back</string>
     <string name="albums_title_albums">Albums</string>
+    <string name="search_placeholder_text_start_searching">Start searching ;)</string>
 </resources>

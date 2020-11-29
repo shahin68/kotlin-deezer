@@ -9,7 +9,7 @@ class WrapperResponseBodyConverter<T>(
 ): Converter<ResponseBody, T> {
     override fun convert(value: ResponseBody): T? {
         val response: WrapperResponse<T>? = converter.convert(value)
-        return response?.body
+        return response?.data
     }
 
 }

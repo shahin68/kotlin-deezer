@@ -17,7 +17,7 @@ open class BaseRepository {
                     response.errorBody()?.string(),
                     NetworkResponse.GenericError::class.java
                 )
-                NetworkResponse.GenericError(typedValue.errorModel)
+                NetworkResponse.GenericError(typedValue.error)
             }
         } catch (e: Exception) {
             NetworkResponse.NetworkError

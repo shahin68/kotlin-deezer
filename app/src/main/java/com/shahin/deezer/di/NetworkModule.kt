@@ -31,7 +31,10 @@ object NetworkModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BuildConfig.BASE_URL)
+            // converter order 1: it checks If custom converter works
             .addConverterFactory(converterFactory)
+            // converter order 2: if order 1 fails, just do default converter
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 

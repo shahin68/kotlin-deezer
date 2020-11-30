@@ -18,7 +18,7 @@ data class Album(
     val tracklist: String,
 
     @field:SerializedName("artist")
-    val artist: Artist,
+    val artist: Artist? = null,
 
     @field:SerializedName("link")
     val link: String,

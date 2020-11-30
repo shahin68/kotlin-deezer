@@ -2,6 +2,8 @@ package com.shahin.deezer.ui.fragments.artist.albums.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shahin.deezer.R
 import com.shahin.deezer.data.models.album.Album
@@ -10,10 +12,21 @@ import com.shahin.deezer.extensions.inflate
 import com.shahin.deezer.extensions.loadImage
 
 class AlbumsAdapter(
-    private val items: List<Album>,
+    private val artistName: String?,
     private val block: (Album) -> Unit
-) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+) : PagingDataAdapter<Album, AlbumsAdapter.AlbumViewHolder>(DIFF_COMPARATOR) {
 
+    companion object {
+        val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<Album>() {
+            override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     inner class AlbumViewHolder(itemView: View, private val block: (Album) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
@@ -21,10 +34,13 @@ class AlbumsAdapter(
         fun bind(item: Album) {
             binding.albumImageIv.loadImage(item.coverMedium)
             binding.albumTitleTv.text = item.title
-            binding.albumArtistTv.text = item.artist.name
+            binding.albumArtistTv.text = item.artist?.name ?: artistName ?: ""
             itemView.setOnClickListener {
                 block.invoke(item)
             }
+        }
+        fun clear() {
+
         }
     }
 
@@ -33,8 +49,12 @@ class AlbumsAdapter(
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.bind(items[position])
+        val item = getItem(position)
+        if (item != null) {
+            holder.bind(item)
+        } else {
+            holder.clear()
+        }
     }
 
-    override fun getItemCount() = items.size
 }

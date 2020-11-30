@@ -10,10 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
-import androidx.paging.flatMap
-import androidx.paging.map
 import androidx.recyclerview.widget.RecyclerView
 import com.shahin.deezer.R
+import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.databinding.FragmentSearchBinding
 import com.shahin.deezer.extensions.fastScrollUp
 import com.shahin.deezer.extensions.hideKeyboard
@@ -32,7 +31,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     private var searchJob: Job? = null
     private val searchAdapter = ArtistsAdapter {
-        navigateToAlbums()
+        navigateToAlbums(it)
     }
     private val offsetScrollThreshold = 3000
 
@@ -48,7 +47,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupListAdapter()
+        setupList()
         handleSearch()
 
         binding.fab.setOnClickListener {
@@ -56,7 +55,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         }
     }
 
-    private fun setupListAdapter() {
+    private fun setupList() {
         binding.recyclerView.adapter = searchAdapter
 
         binding.recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
@@ -127,9 +126,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             .launchIn(lifecycleScope)
     }
 
-    private fun navigateToAlbums() {
+    private fun navigateToAlbums(artist: Artist) {
         findNavController().navigate(
-            SearchFragmentDirections.actionFragmentSearchToFragmentAlbums()
+            SearchFragmentDirections.actionFragmentSearchToFragmentAlbums(
+                artistId = artist.id,
+                artistName = artist.name
+            )
         )
     }
 

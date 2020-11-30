@@ -1,6 +1,7 @@
 package com.shahin.deezer.di
 
-import com.shahin.deezer.api.ArtistsApi
+import com.shahin.deezer.data.services.AlbumsApi
+import com.shahin.deezer.data.services.ArtistsApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,5 +19,10 @@ object AppModule {
         return retrofit.create(ArtistsApi::class.java)
     }
 
-
+    @Provides
+    fun provideAlbumsApi(
+        retrofit: Retrofit
+    ): AlbumsApi {
+        return retrofit.create(AlbumsApi::class.java)
+    }
 }

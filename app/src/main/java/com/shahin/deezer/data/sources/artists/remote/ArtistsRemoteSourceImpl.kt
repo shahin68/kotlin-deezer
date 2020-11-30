@@ -3,12 +3,10 @@ package com.shahin.deezer.data.sources.artists.remote
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.shahin.deezer.api.ArtistsApi
+import com.shahin.deezer.data.services.ArtistsApi
 import com.shahin.deezer.data.models.artist.Artist
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-
-private const val NETWORK_PAGE_SIZE = 25
 
 class ArtistsRemoteSourceImpl @Inject constructor(
     private val service: ArtistsApi,
@@ -17,7 +15,7 @@ class ArtistsRemoteSourceImpl @Inject constructor(
     override fun search(artistName: String): Flow<PagingData<Artist>> {
         return Pager(
             config = PagingConfig(
-                pageSize = NETWORK_PAGE_SIZE,
+                pageSize = 25,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {

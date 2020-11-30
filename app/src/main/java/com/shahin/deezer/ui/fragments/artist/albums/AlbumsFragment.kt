@@ -5,20 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import com.shahin.deezer.R
 import com.shahin.deezer.data.models.album.Album
-import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.databinding.FragmentAlbumsBinding
 import com.shahin.deezer.ui.fragments.BaseFragment
 import com.shahin.deezer.ui.fragments.artist.albums.adapter.AlbumsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_albums) {
 
     private val viewModel: AlbumsViewModel by viewModels()
+    private val args: AlbumsFragmentArgs by navArgs()
+    private lateinit var albumsAdapter: AlbumsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,26 +47,51 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
             findNavController().popBackStack()
         }
 
-        viewModel.fetchAlbums()
-
-        val items = arrayListOf<Album>()
-        /*for (i in 0..20) {
-            items.add(
-                Album(
-                    id = i.toString(),
-                    title = "Album Name $i",
-                    artist = Artist(
-                        name = "Artist Name $i"
-                    )
-                )
-            )
-        }*/
-        setupRecycler(items)
+        setupList()
+        fetchAlbums()
     }
 
-    private fun setupRecycler(list: List<Album>) {
-        binding.recyclerView.adapter = AlbumsAdapter(list) {
+    private fun setupList() {
+        albumsAdapter = AlbumsAdapter(args.artistName) {
             navigateToTracks(it)
+        }
+        binding.recyclerView.adapter = albumsAdapter
+
+        albumsAdapter.loadStateFlow.onEach { state ->
+            if (isAdded) {
+                binding.loading.isVisible = state.refresh is LoadState.Loading
+                if (albumsAdapter.itemCount == 0) {
+                    binding.messageTv.isVisible = true
+                    when (state.refresh) {
+                        is LoadState.NotLoading -> {
+                            binding.messageTv.text = getString(R.string.generic_text_found_nothing)
+                        }
+                        is LoadState.Loading -> {
+                            binding.messageTv.text = getString(R.string.generic_text_loading)
+                        }
+                        is LoadState.Error -> {
+                            binding.messageTv.text = "api error"
+                        }
+                    }
+                } else {
+                    binding.messageTv.isVisible = state.refresh is LoadState.Error
+                    binding.messageTv.text = "api error"
+                }
+            }
+        }.launchIn(lifecycleScope)
+    }
+
+    private fun fetchAlbums() {
+        lifecycleScope.launch {
+            viewModel.fetchAlbums(args.artistId).collectLatest {
+                if (isAdded) {
+                    binding.loading.isVisible = false
+                    binding.messageTv.isVisible = false
+                    if (::albumsAdapter.isInitialized) {
+                        albumsAdapter.submitData(it)
+                    }
+                }
+            }
         }
     }
 
@@ -65,7 +99,8 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
         findNavController().navigate(
             AlbumsFragmentDirections.actionFragmentAlbumsToFragmentTracks(
                 albumName = albumModel.title,
-                artistName = albumModel.artist.name
+                artistName = albumModel.artist?.name ?: args.artistName,
+                cover = albumModel.coverMedium
             )
         )
     }

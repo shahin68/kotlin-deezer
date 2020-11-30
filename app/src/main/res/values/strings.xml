@@ -5,4 +5,5 @@
     <string name="generic_action_back">back</string>
     <string name="albums_title_albums">Albums</string>
     <string name="search_placeholder_text_start_searching">Start searching ;)</string>
+    <string name="generic_text_loading">Loading …</string>
 </resources>

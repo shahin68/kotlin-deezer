@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import reactivecircus.flowbinding.common.checkMainThread
 import reactivecircus.flowbinding.common.safeOffer
 
-fun AppCompatImageView.loadImage(uri: String) {
+fun AppCompatImageView.loadImage(uri: String?) {
     this.load(uri) {
         placeholder(R.drawable.ic_placeholder)
         crossfade(true)

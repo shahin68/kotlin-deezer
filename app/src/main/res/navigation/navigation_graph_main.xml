@@ -23,6 +23,16 @@
         <action
             android:id="@+id/action_fragmentAlbums_to_fragmentTracks"
             app:destination="@id/fragmentTracks" />
+        <argument
+            android:name="artistId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="" />
+        <argument
+            android:name="artistName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="" />
     </fragment>
 
     <fragment
@@ -37,6 +47,11 @@
             android:defaultValue="" />
         <argument
             android:name="artistName"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="" />
+        <argument
+            android:name="cover"
             app:argType="string"
             app:nullable="true"
             android:defaultValue="" />

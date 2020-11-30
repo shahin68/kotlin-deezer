@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.shahin.deezer.R
 import com.shahin.deezer.data.models.TrackModel
 import com.shahin.deezer.databinding.FragmentTracksBinding
+import com.shahin.deezer.extensions.loadImage
 import com.shahin.deezer.ui.fragments.BaseFragment
 import com.shahin.deezer.ui.fragments.artist.tracks.adapter.TracksAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +41,7 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
 
         viewModel.fetchTracks()
 
+        binding.appBarImage.loadImage(args.cover)
         binding.toolbar.title = args.albumName
         binding.toolbar.subtitle = args.artistName
 

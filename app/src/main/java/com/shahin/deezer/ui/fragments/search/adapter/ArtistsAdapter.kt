@@ -30,14 +30,15 @@ class ArtistsAdapter(
     inner class ArtistViewHolder(itemView: View, private val block: (Artist) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
         val binding = ItemArtistBinding.bind(itemView)
-        fun bind(item: Artist?) {
-            item?.let {
-                binding.artistIv.loadImage(item.pictureMedium)
-                binding.artistTv.text = item.name
-                itemView.setOnClickListener {
-                    block.invoke(item)
-                }
+        fun bind(item: Artist) {
+            binding.artistIv.loadImage(item.pictureMedium)
+            binding.artistTv.text = item.name
+            itemView.setOnClickListener {
+                block.invoke(item)
             }
+        }
+        fun clear() {
+
         }
     }
 
@@ -46,7 +47,12 @@ class ArtistsAdapter(
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = getItem(position)
+        if (item != null) {
+            holder.bind(item)
+        } else {
+            holder.clear()
+        }
     }
 
 }

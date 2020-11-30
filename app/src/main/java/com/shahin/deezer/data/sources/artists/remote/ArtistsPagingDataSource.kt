@@ -1,7 +1,7 @@
 package com.shahin.deezer.data.sources.artists.remote
 
 import androidx.paging.PagingSource
-import com.shahin.deezer.api.ArtistsApi
+import com.shahin.deezer.data.services.ArtistsApi
 import com.shahin.deezer.data.models.artist.Artist
 import retrofit2.HttpException
 import java.io.IOException

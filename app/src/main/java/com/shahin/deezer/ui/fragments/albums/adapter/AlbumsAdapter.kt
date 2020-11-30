@@ -1,4 +1,4 @@
-package com.shahin.deezer.ui.fragments.artist.albums.adapter
+package com.shahin.deezer.ui.fragments.albums.adapter
 
 import android.view.View
 import android.view.ViewGroup

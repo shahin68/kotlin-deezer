@@ -1,4 +1,4 @@
-package com.shahin.deezer.ui.fragments.artist.albums
+package com.shahin.deezer.ui.fragments.albums
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel

@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/fragmentAlbums"
-        android:name="com.shahin.deezer.ui.fragments.artist.albums.AlbumsFragment"
+        android:name="com.shahin.deezer.ui.fragments.albums.AlbumsFragment"
         android:label="Albums"
         tools:layout="@layout/fragment_albums">
         <action
@@ -37,9 +37,14 @@
 
     <fragment
         android:id="@+id/fragmentTracks"
-        android:name="com.shahin.deezer.ui.fragments.artist.tracks.TracksFragment"
+        android:name="com.shahin.deezer.ui.fragments.tracks.TracksFragment"
         android:label="Tracks"
         tools:layout="@layout/fragment_tracks">
+        <argument
+            android:name="albumId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="" />
         <argument
             android:name="albumName"
             app:argType="string"

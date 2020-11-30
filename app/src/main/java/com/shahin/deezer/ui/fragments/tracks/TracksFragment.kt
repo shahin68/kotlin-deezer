@@ -1,4 +1,4 @@
-package com.shahin.deezer.ui.fragments.artist.albums
+package com.shahin.deezer.ui.fragments.tracks
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +12,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import com.shahin.deezer.R
-import com.shahin.deezer.data.models.album.Album
-import com.shahin.deezer.databinding.FragmentAlbumsBinding
+import com.shahin.deezer.databinding.FragmentTracksBinding
+import com.shahin.deezer.extensions.loadImage
 import com.shahin.deezer.ui.fragments.BaseFragment
-import com.shahin.deezer.ui.fragments.artist.albums.adapter.AlbumsAdapter
+import com.shahin.deezer.ui.fragments.tracks.adapter.TracksAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
@@ -23,18 +23,18 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_albums) {
+class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tracks) {
 
-    private val viewModel: AlbumsViewModel by viewModels()
-    private val args: AlbumsFragmentArgs by navArgs()
-    private lateinit var albumsAdapter: AlbumsAdapter
+    private val viewModel: TracksViewModel by viewModels()
+    private val args: TracksFragmentArgs by navArgs()
+    private lateinit var tracksAdapter: TracksAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
+        _binding = FragmentTracksBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -42,25 +42,28 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
 
+        binding.appBarImage.loadImage(args.cover)
+        binding.toolbar.title = args.albumName
+        binding.toolbar.subtitle = args.artistName
+
         setupList()
-        fetchAlbums()
+        fetchTracks()
     }
 
     private fun setupList() {
-        albumsAdapter = AlbumsAdapter(args.artistName) {
-            navigateToTracks(it)
-        }
-        binding.recyclerView.adapter = albumsAdapter
+        tracksAdapter = TracksAdapter {
 
-        albumsAdapter.loadStateFlow.onEach { state ->
+        }
+        binding.recyclerView.adapter = tracksAdapter
+
+        tracksAdapter.loadStateFlow.onEach { state ->
             if (isAdded) {
                 binding.loading.isVisible = state.refresh is LoadState.Loading
-                if (albumsAdapter.itemCount == 0) {
+                if (tracksAdapter.itemCount == 0) {
                     binding.messageTv.isVisible = true
                     when (state.refresh) {
                         is LoadState.NotLoading -> {
@@ -81,27 +84,17 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
         }.launchIn(lifecycleScope)
     }
 
-    private fun fetchAlbums() {
+    private fun fetchTracks() {
         lifecycleScope.launch {
-            viewModel.fetchAlbums(args.artistId).collectLatest {
+            viewModel.fetchTracks(args.albumId).collectLatest {
                 if (isAdded) {
                     binding.loading.isVisible = false
                     binding.messageTv.isVisible = false
-                    if (::albumsAdapter.isInitialized) {
-                        albumsAdapter.submitData(it)
+                    if (::tracksAdapter.isInitialized) {
+                        tracksAdapter.submitData(it)
                     }
                 }
             }
         }
-    }
-
-    private fun navigateToTracks(albumModel: Album) {
-        findNavController().navigate(
-            AlbumsFragmentDirections.actionFragmentAlbumsToFragmentTracks(
-                albumName = albumModel.title,
-                artistName = albumModel.artist?.name ?: args.artistName,
-                cover = albumModel.coverMedium
-            )
-        )
     }
 }

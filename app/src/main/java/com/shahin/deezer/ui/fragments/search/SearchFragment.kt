@@ -10,9 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
+import androidx.paging.flatMap
+import androidx.paging.map
 import androidx.recyclerview.widget.RecyclerView
 import com.shahin.deezer.R
 import com.shahin.deezer.databinding.FragmentSearchBinding
+import com.shahin.deezer.extensions.fastScrollUp
 import com.shahin.deezer.extensions.hideKeyboard
 import com.shahin.deezer.extensions.textChanges
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -49,7 +52,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         handleSearch()
 
         binding.fab.setOnClickListener {
-            binding.recyclerView.smoothScrollToPosition(0)
+            binding.recyclerView.fastScrollUp()
         }
     }
 

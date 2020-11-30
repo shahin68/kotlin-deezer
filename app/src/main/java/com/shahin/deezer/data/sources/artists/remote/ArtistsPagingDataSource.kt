@@ -1,10 +1,8 @@
 package com.shahin.deezer.data.sources.artists.remote
 
-import android.util.Log
 import androidx.paging.PagingSource
 import com.shahin.deezer.api.ArtistsApi
-import com.shahin.deezer.data.models.search.DataItem
-import kotlinx.coroutines.flow.Flow
+import com.shahin.deezer.data.models.artist.Artist
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -13,20 +11,20 @@ private const val STARTING_PAGE_INDEX = 1
 class ArtistsPagingDataSource(
     private val service: ArtistsApi,
     private val query: String
-) : PagingSource<Int, DataItem>() {
+) : PagingSource<Int, Artist>() {
 
     companion object {
-        private val inMemoryCache = mutableListOf<DataItem>()
+        private val inMemoryCache = mutableListOf<Artist>()
         private val queryCache = mutableListOf<String>()
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DataItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Artist> {
         val position = params.key ?: STARTING_PAGE_INDEX
         val apiQuery = query
         return try {
             val lastQuery = queryCache.find { it == apiQuery }
             if (lastQuery == null) {
-                val response = service.query(apiQuery, position, params.loadSize)
+                val response = service.queryForArtists(apiQuery, position, params.loadSize)
                 val results = response.body()!!
                 queryCache.add(apiQuery)
                 val lastIds = inMemoryCache.map { it.id }
@@ -54,11 +52,11 @@ class ArtistsPagingDataSource(
         }
     }
 
-    private fun resultsValidatedAndSorted(query: String): List<DataItem> {
+    private fun resultsValidatedAndSorted(query: String): List<Artist> {
         return inMemoryCache.filter {
-            it.artist.name.contains(query, true) ||
-                    (it.title.contains(query, true))
-        }.sortedWith(compareByDescending<DataItem> { it.artist.name }.thenBy { it.id })
+            it.name.contains(query, true) ||
+                    (it.link.contains(query, true))
+        }.sortedWith(compareByDescending<Artist> { it.nbFan }.thenBy { it.name })
     }
 
     override fun invalidate() {

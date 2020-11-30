@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shahin.deezer.R
-import com.shahin.deezer.data.models.AlbumModel
+import com.shahin.deezer.data.models.album.Album
+import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.databinding.FragmentAlbumsBinding
 import com.shahin.deezer.ui.fragments.BaseFragment
 import com.shahin.deezer.ui.fragments.artist.albums.adapter.AlbumsAdapter
@@ -39,31 +40,32 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
 
         viewModel.fetchAlbums()
 
-        val items = arrayListOf<AlbumModel>()
-        for (i in 0..20) {
+        val items = arrayListOf<Album>()
+        /*for (i in 0..20) {
             items.add(
-                AlbumModel(
-                    i.toLong(),
-                    "Album Name $i",
-                    "Artist Name $i",
-                    i.toString()
+                Album(
+                    id = i.toString(),
+                    title = "Album Name $i",
+                    artist = Artist(
+                        name = "Artist Name $i"
+                    )
                 )
             )
-        }
+        }*/
         setupRecycler(items)
     }
 
-    private fun setupRecycler(list: List<AlbumModel>) {
+    private fun setupRecycler(list: List<Album>) {
         binding.recyclerView.adapter = AlbumsAdapter(list) {
             navigateToTracks(it)
         }
     }
 
-    private fun navigateToTracks(albumModel: AlbumModel) {
+    private fun navigateToTracks(albumModel: Album) {
         findNavController().navigate(
             AlbumsFragmentDirections.actionFragmentAlbumsToFragmentTracks(
-                albumName = albumModel.albumName,
-                artistName = albumModel.albumArtist
+                albumName = albumModel.title,
+                artistName = albumModel.artist.name
             )
         )
     }

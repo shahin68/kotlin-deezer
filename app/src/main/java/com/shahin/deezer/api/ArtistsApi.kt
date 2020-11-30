@@ -1,6 +1,7 @@
 package com.shahin.deezer.api
 
-import com.shahin.deezer.data.models.search.ArtistItem
+import com.shahin.deezer.data.models.album.Album
+import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.data.models.search.DataItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,7 +14,7 @@ interface ArtistsApi {
     @Headers(
         "No-Locality: true"
     )
-    suspend fun query(
+    suspend fun generalSearch(
         @Query("q") artistName: String,
         @Query("index") page: Int,
         @Query("limit") limit: Int = 25
@@ -23,9 +24,19 @@ interface ArtistsApi {
     @Headers(
         "No-Locality: true"
     )
-    suspend fun queryForArtist(
+    suspend fun queryForArtists(
         @Query("q") artistName: String,
         @Query("index") page: Int,
         @Query("limit") limit: Int = 25
-    ): Response<List<ArtistItem>>
+    ): Response<List<Artist>>
+
+    @GET("search/album")
+    @Headers(
+        "No-Locality: true"
+    )
+    suspend fun queryForAlbums(
+        @Query("q") artistName: String,
+        @Query("index") page: Int,
+        @Query("limit") limit: Int = 25
+    ): Response<List<Album>>
 }

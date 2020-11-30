@@ -17,6 +17,13 @@ data class Album(
     @field:SerializedName("tracklist")
     val tracklist: String,
 
+    /**
+     * @param artist this parameter is visible through general search
+     * @see generalSearch
+     * however it's not being received though Albums query
+     * @see queryForAlbums
+     * which is unfortunate!?
+     */
     @field:SerializedName("artist")
     val artist: Artist? = null,
 

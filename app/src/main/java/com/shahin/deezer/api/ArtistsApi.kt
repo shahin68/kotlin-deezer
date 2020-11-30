@@ -11,8 +11,7 @@ interface ArtistsApi {
 
     @GET("search")
     @Headers(
-        "No-Locality: true",
-        "No-Authentication: true"
+        "No-Locality: true"
     )
     suspend fun query(
         @Query("q") artistName: String,
@@ -22,8 +21,7 @@ interface ArtistsApi {
 
     @GET("search/artist")
     @Headers(
-        "No-Locality: true",
-        "No-Authentication: true"
+        "No-Locality: true"
     )
     suspend fun queryForArtist(
         @Query("q") artistName: String,

@@ -1,5 +1,6 @@
 package com.shahin.deezer.data.sources.artists.remote
 
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -11,15 +12,21 @@ import javax.inject.Inject
 private const val NETWORK_PAGE_SIZE = 25
 
 class ArtistsRemoteSourceImpl @Inject constructor(
-    private val service: ArtistsApi
+    private val service: ArtistsApi,
 ) : ArtistsRemoteSource {
+
     override fun search(artistName: String): Flow<PagingData<DataItem>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { ArtistsPagingDataSource(service, artistName) }
+            pagingSourceFactory = {
+                ArtistsPagingDataSource(
+                    service,
+                    artistName
+                )
+            }
         ).flow
     }
 

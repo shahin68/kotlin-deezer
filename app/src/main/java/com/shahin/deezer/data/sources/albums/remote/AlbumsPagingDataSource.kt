@@ -6,6 +6,7 @@ package com.shahin.deezer.data.sources.albums.remote
 
 import androidx.paging.PagingSource
 import com.shahin.deezer.data.models.album.Album
+import com.shahin.deezer.data.models.album.AlbumShell
 import com.shahin.deezer.data.services.AlbumsApi
 import retrofit2.HttpException
 import java.io.IOException
@@ -16,17 +17,17 @@ import java.io.IOException
 class AlbumsPagingDataSource(
     private val service: AlbumsApi,
     private val artistId: String
-) : PagingSource<Int, Album>() {
+) : PagingSource<Int, AlbumShell>() {
 
     private val startPage = 0
     private val limit = 25
 
     companion object {
-        private val inMemoryCache = mutableListOf<Album>()
+        private val inMemoryCache = mutableListOf<AlbumShell>()
         private val queryCache = mutableListOf<String>()
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Album> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumShell> {
         val position = params.key ?: startPage
         val apiQuery = artistId
         return try {
@@ -54,6 +55,10 @@ class AlbumsPagingDataSource(
                 val body = response.body()!!
                 val results = response.body()!!.data
 
+                /**
+                 * shelling album results
+                 */
+                val shelled = results.map { AlbumShell(it, apiQuery) }
 
                 /**
                  * keep the new query
@@ -64,12 +69,12 @@ class AlbumsPagingDataSource(
                  * keep the results
                  */
                 inMemoryCache.addAll(
-                    results
+                    shelled
                 )
                 LoadResult.Page(
-                    data = if (position * limit <= body.total) results else emptyList(),
+                    data = if (position * limit <= body.total) shelled else emptyList(),
                     prevKey = if (position == startPage) null else position - 1,
-                    nextKey = if (results.isEmpty() || position * limit > body.total) null else position + 1
+                    nextKey = if (shelled.isEmpty() || position * limit > body.total) null else position + 1
                 )
             }
         } catch (exception: IOException) {
@@ -82,9 +87,9 @@ class AlbumsPagingDataSource(
     /**
      * validate results based on Artist ID
      */
-    private fun resultsValidatedAndSorted(artistId: String?): List<Album> {
+    private fun resultsValidatedAndSorted(artistId: String?): List<AlbumShell> {
         return inMemoryCache.filter {
-            it.artist?.id.equals(artistId, false)
+            it.artistId.equals(artistId, true)
         }
     }
 

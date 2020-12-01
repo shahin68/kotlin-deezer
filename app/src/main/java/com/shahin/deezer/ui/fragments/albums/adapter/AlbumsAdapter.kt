@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shahin.deezer.R
 import com.shahin.deezer.data.models.album.Album
+import com.shahin.deezer.data.models.album.AlbumShell
 import com.shahin.deezer.databinding.ItemAlbumBinding
 import com.shahin.deezer.extensions.inflate
 import com.shahin.deezer.extensions.loadImage
@@ -18,15 +19,15 @@ import com.shahin.deezer.extensions.loadImage
 class AlbumsAdapter(
     private val artistName: String?,
     private val block: (Album) -> Unit
-) : PagingDataAdapter<Album, AlbumsAdapter.AlbumViewHolder>(DIFF_COMPARATOR) {
+) : PagingDataAdapter<AlbumShell, AlbumsAdapter.AlbumViewHolder>(DIFF_COMPARATOR) {
 
     companion object {
-        val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<Album>() {
-            override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-                return oldItem.id == newItem.id
+        val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<AlbumShell>() {
+            override fun areItemsTheSame(oldItem: AlbumShell, newItem: AlbumShell): Boolean {
+                return oldItem.album.id == newItem.album.id
             }
 
-            override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+            override fun areContentsTheSame(oldItem: AlbumShell, newItem: AlbumShell): Boolean {
                 return oldItem == newItem
             }
         }
@@ -55,7 +56,7 @@ class AlbumsAdapter(
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.bind(item)
+            holder.bind(item.album)
         } else {
             holder.clear()
         }

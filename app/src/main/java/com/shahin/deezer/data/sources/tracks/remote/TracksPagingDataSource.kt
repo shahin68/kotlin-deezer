@@ -88,7 +88,7 @@ class TracksPagingDataSource(
      */
     private fun resultsValidatedAndSorted(albumId: String?): List<TrackShell> {
         return inMemoryCache.filter {
-            it.albumId.equals(albumId, false)
+            it.albumId.equals(albumId, true)
         }
     }
 

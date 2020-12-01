@@ -8,6 +8,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.shahin.deezer.data.models.album.Album
+import com.shahin.deezer.data.models.album.AlbumShell
 import com.shahin.deezer.data.services.AlbumsApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -20,7 +21,7 @@ class AlbumsRemoteSourceImpl @Inject constructor(
     private val albumsApi: AlbumsApi
 ): AlbumsRemoteSource {
 
-    override fun fetchAlbums(artistId: String): Flow<PagingData<Album>> {
+    override fun fetchAlbums(artistId: String): Flow<PagingData<AlbumShell>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 25,

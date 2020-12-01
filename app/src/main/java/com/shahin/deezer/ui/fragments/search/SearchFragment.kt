@@ -14,6 +14,7 @@ import androidx.paging.map
 import androidx.recyclerview.widget.RecyclerView
 import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
+import com.shahin.deezer.commons.MyLoadStateAdapter
 import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.data.models.artist.ArtistShell
 import com.shahin.deezer.databinding.FragmentSearchBinding
@@ -59,7 +60,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
     private fun setupList() {
         binding.recyclerView.apply {
-            adapter = searchAdapter
+            adapter = searchAdapter.withLoadStateFooter(
+                footer = MyLoadStateAdapter()
+            )
             addItemDecoration(StickyItemDecoration(
                 parent = this,
                 shouldFadeOutHeader = false,
@@ -83,27 +86,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         searchAdapter.loadStateFlow.onEach { state ->
             if (isAdded) {
                 binding.loading.isVisible = state.refresh is LoadState.Loading
-                if (searchAdapter.itemCount == 0) {
-                    binding.messageTv.isVisible = true
-                    when (state.refresh) {
-                        is LoadState.NotLoading -> {
-                            if (binding.searchView.query.isEmpty()) {
-                                binding.messageTv.text = getString(R.string.search_placeholder_text_start_searching)
-                            } else {
-                                binding.messageTv.text = getString(R.string.generic_text_found_nothing)
-                            }
-                        }
-                        is LoadState.Loading -> {
-                            binding.messageTv.text = getString(R.string.search_placeholder_text_start_searching)
-                        }
-                        is LoadState.Error -> {
-                            binding.messageTv.text = "api error"
-                        }
-                    }
-                } else {
-                    binding.messageTv.isVisible = state.refresh is LoadState.Error
-                    binding.messageTv.text = "api error"
-                }
             }
         }.launchIn(lifecycleScope)
     }
@@ -114,10 +96,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             .textChanges()
             .filterNotNull()
             .onEach {
-                if (it.isEmpty() && searchAdapter.itemCount == 0) {
-                    binding.messageTv.isVisible = true
-                    binding.messageTv.text = getString(R.string.search_placeholder_text_start_searching)
-                }
                 binding.loading.isVisible = it.isNotEmpty()
             }
             .debounce(500)
@@ -128,7 +106,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     viewModel.search(it.trim()).collectLatest {
                         if (isAdded) {
                             binding.loading.isVisible = false
-                            binding.messageTv.isVisible = false
                             searchAdapter.submitData(it)
                         }
                     }

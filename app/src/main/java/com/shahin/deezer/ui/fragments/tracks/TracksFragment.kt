@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
+import com.shahin.deezer.commons.MyLoadStateAdapter
 import com.shahin.deezer.databinding.FragmentTracksBinding
 import com.shahin.deezer.extensions.loadImage
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -61,7 +62,9 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
         }
 
         binding.recyclerView.apply {
-            adapter = tracksAdapter
+            adapter = tracksAdapter.withLoadStateFooter(
+                footer = MyLoadStateAdapter()
+            )
             addItemDecoration(StickyItemDecoration(
                 parent = this,
                 shouldFadeOutHeader = false,
@@ -74,23 +77,6 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
         tracksAdapter.loadStateFlow.onEach { state ->
             if (isAdded) {
                 binding.loading.isVisible = state.refresh is LoadState.Loading
-                if (tracksAdapter.itemCount == 0) {
-                    binding.messageTv.isVisible = true
-                    when (state.refresh) {
-                        is LoadState.NotLoading -> {
-                            binding.messageTv.text = getString(R.string.generic_text_found_nothing)
-                        }
-                        is LoadState.Loading -> {
-                            binding.messageTv.text = getString(R.string.generic_text_loading)
-                        }
-                        is LoadState.Error -> {
-                            binding.messageTv.text = "api error"
-                        }
-                    }
-                } else {
-                    binding.messageTv.isVisible = state.refresh is LoadState.Error
-                    binding.messageTv.text = "api error"
-                }
             }
         }.launchIn(lifecycleScope)
     }
@@ -100,7 +86,6 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
             viewModel.fetchTracks(args.albumId ?: "").collectLatest {
                 if (isAdded) {
                     binding.loading.isVisible = false
-                    binding.messageTv.isVisible = false
                     if (::tracksAdapter.isInitialized) {
                         tracksAdapter.submitData(it)
                     }

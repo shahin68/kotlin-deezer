@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import com.shahin.deezer.R
+import com.shahin.deezer.commons.MyLoadStateAdapter
 import com.shahin.deezer.data.models.album.Album
 import com.shahin.deezer.databinding.FragmentAlbumsBinding
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -54,28 +55,12 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
         albumsAdapter = AlbumsAdapter(args.artistName) {
             navigateToTracks(it)
         }
-        binding.recyclerView.adapter = albumsAdapter
+        binding.recyclerView.adapter =
+            albumsAdapter.withLoadStateFooter(footer = MyLoadStateAdapter())
 
         albumsAdapter.loadStateFlow.onEach { state ->
             if (isAdded) {
                 binding.loading.isVisible = state.refresh is LoadState.Loading
-                if (albumsAdapter.itemCount == 0) {
-                    binding.messageTv.isVisible = true
-                    when (state.refresh) {
-                        is LoadState.NotLoading -> {
-                            binding.messageTv.text = getString(R.string.generic_text_found_nothing)
-                        }
-                        is LoadState.Loading -> {
-                            binding.messageTv.text = getString(R.string.generic_text_loading)
-                        }
-                        is LoadState.Error -> {
-                            binding.messageTv.text = "api error"
-                        }
-                    }
-                } else {
-                    binding.messageTv.isVisible = state.refresh is LoadState.Error
-                    binding.messageTv.text = "api error"
-                }
             }
         }.launchIn(lifecycleScope)
     }
@@ -85,7 +70,6 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
             viewModel.fetchAlbums(args.artistId ?: "").collectLatest {
                 if (isAdded) {
                     binding.loading.isVisible = false
-                    binding.messageTv.isVisible = false
                     if (::albumsAdapter.isInitialized) {
                         albumsAdapter.submitData(it)
                     }

@@ -1,10 +1,8 @@
 package com.shahin.deezer.data.sources.tracks.remote
 
 import androidx.paging.PagingSource
-import com.shahin.deezer.data.models.tracks.Track
 import com.shahin.deezer.data.models.tracks.TrackShell
 import com.shahin.deezer.data.services.TracksApi
-import com.shahin.deezer.ui.fragments.tracks.adapter.TracksAdapter
 import retrofit2.HttpException
 import java.io.IOException
 

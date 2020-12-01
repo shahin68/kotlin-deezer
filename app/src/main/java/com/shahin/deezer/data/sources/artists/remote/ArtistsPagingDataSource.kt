@@ -3,7 +3,6 @@ package com.shahin.deezer.data.sources.artists.remote
 import androidx.paging.PagingSource
 import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.data.services.ArtistsApi
-import com.shahin.deezer.ui.fragments.search.adapter.ArtistsAdapter
 import retrofit2.HttpException
 import java.io.IOException
 

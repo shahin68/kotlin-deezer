@@ -80,16 +80,4 @@
                 tools:listitem="@layout/item_track" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/message_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/generic_margin_16dp"
-        android:translationY="46dp"
-        app:layout_anchor="@id/nested"
-        app:layout_anchorGravity="top"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="16dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

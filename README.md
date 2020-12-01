@@ -1,5 +1,8 @@
 # kotlin-deezer
-A kotlin demo with Deezer as rest api provider
+<h3>A kotlin demo with Deezer as rest api provider</h3>
+
+developed using <strong>Coroutines</strong>, <strong>Hilt</strong>, <strong>Paging 3</strong>, <strong>Retrofit</strong> & <strong>Navigation ui</strong>
+
 
 Project Features:
 

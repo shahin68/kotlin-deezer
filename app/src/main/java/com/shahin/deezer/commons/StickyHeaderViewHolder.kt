@@ -12,8 +12,7 @@ class StickyHeaderViewHolder(itemView: View) : BindingViewHolder(itemView) {
     private val tv = itemView.findViewById<TextView>(R.id.header_title)
     private val divider = itemView.findViewById<View>(R.id.header_divider)
     fun bind(title: String?, showDivider: Boolean) {
-        container.visibleOrGone(!title.isNullOrEmpty())
-        tv.text = title
+        tv.text = title ?: itemView.context.getString(R.string.tracks_list_placeholder_header_album_volume)
         divider.isVisible = showDivider
     }
 }

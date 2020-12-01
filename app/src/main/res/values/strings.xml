@@ -6,4 +6,5 @@
     <string name="albums_title_albums">Albums</string>
     <string name="search_placeholder_text_start_searching">Start searching ;)</string>
     <string name="generic_text_loading">Loading …</string>
+    <string name="tracks_list_placeholder_header_album_volume">Album Volume</string>
 </resources>

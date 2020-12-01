@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="generic_margin_8dp">8dp</dimen>
+    <dimen name="generic_margin_16dp">16dp</dimen>
+    <dimen name="generic_text_size">16sp</dimen>
+    <dimen name="generic_heading_text_size">18sp</dimen>
+    <dimen name="generic_sticky_header_text_size">22sp</dimen>
+    <dimen name="generic_title_text_size">28sp</dimen>
+    <dimen name="search_view_start_padding">80sp</dimen>
+    <dimen name="search_view_top_padding">2sp</dimen>
+    <dimen name="search_view_height">52sp</dimen>
+    <dimen name="artist_image_size">60dp</dimen>
+    <dimen name="albums_list_top_padding">64dp</dimen> <!--56dp + 8dp-->
+    <dimen name="tracks_toolbar_image_margin">84dp</dimen>
+    <dimen name="tracks_appbar_size">400dp</dimen>
+    <dimen name="generic_margin_24dp">24dp</dimen>
+    <dimen name="search_fab_size">40dp</dimen>
+    <dimen name="generic_size_24dp">24dp</dimen>
+</resources>

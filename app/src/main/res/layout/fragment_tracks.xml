@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tracks_appbar_size"
+        android:background="?attr/colorOnPrimary">
+
+        <com.google.android.material.appbar.SubtitleCollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_linear_gradient"
+            app:collapsedSubtitleTextAppearance="@style/ToolbarSubTitleStyle.Collapsing.Collapsed"
+            app:collapsedTitleGravity="start|bottom"
+            app:collapsedTitleTextAppearance="@style/ToolbarTitleStyle.Collapsing.Collapsed"
+            app:contentScrim="?attr/colorOnPrimary"
+            app:expandedSubtitleTextAppearance="@style/ToolbarSubTitleStyle.Collapsing.Expanded"
+            app:expandedTitleGravity="start|bottom"
+            app:expandedTitleMargin="@dimen/generic_margin_16dp"
+            app:expandedTitleTextAppearance="@style/ToolbarTitleStyle.Collapsing.Expanded"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollInterpolator="@android:anim/linear_interpolator"
+            app:scrimAnimationDuration="100"
+            app:titleEnabled="true"
+            app:toolbarId="@+id/toolbar">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/app_bar_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/albums_list_top_padding"
+                android:layout_marginBottom="@dimen/tracks_toolbar_image_margin"
+                android:scaleType="fitCenter"
+                app:layout_collapseMode="parallax"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/ToolbarStyle.Collapsing"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                tools:subtitle="Subtitle"
+                tools:title="A very large title" />
+        </com.google.android.material.appbar.SubtitleCollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/loading"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/generic_margin_16dp"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_track" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

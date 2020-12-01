@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Deezer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">?attr/colorPrimary</item>
+        <item name="colorSecondaryVariant">?attr/colorPrimaryVariant</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSurface">@color/black_transparent_50p</item>
+        <item name="colorControlHighlight">@color/black_transparent_15p</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
+        <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">?attr/colorOnPrimary</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="autoCompleteTextViewStyle">@style/AutoCompleteTextView</item>
+        <item name="fontFamily">@font/font_regular</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/generic_text_size</item>
+        <item name="colorOnBackground">@color/black_transparent_15p</item>
+    </style>
+
+    <style name="CardViewStyle" parent="CardView">
+        <item name="cardBackgroundColor">?attr/colorPrimaryDark</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Theme.MaterialComponents.DayNight">
+        <item name="searchHintIcon">@null</item>
+        <item name="searchIcon">@drawable/ic_search_white</item>
+        <item name="closeIcon">@drawable/ic_close_white</item>
+    </style>
+
+    <style name="AutoCompleteTextView" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:textSize">@dimen/generic_text_size</item>
+        <item name="android:paddingLeft">@dimen/search_view_start_padding</item>
+        <item name="android:paddingTop">@dimen/search_view_top_padding</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
+        <item name="navigationIcon">@drawable/ic_back_black</item>
+        <item name="android:background">@color/white_transparent_90p</item>
+        <item name="titleTextAppearance">@style/ToolbarTextStyle</item>
+        <item name="subtitleTextAppearance">@style/ToolbarSubTitleStyle</item>
+    </style>
+
+    <style name="ToolbarStyle.Collapsing" parent="Widget.MaterialComponents.Toolbar">
+        <item name="navigationIcon">@drawable/ic_back_black</item>
+    </style>
+</resources>

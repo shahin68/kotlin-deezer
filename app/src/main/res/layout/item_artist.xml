@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:paddingHorizontal="@dimen/generic_margin_16dp"
+    android:paddingVertical="@dimen/generic_margin_8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/artist_iv"
+        android:layout_width="@dimen/artist_image_size"
+        android:layout_height="@dimen/artist_image_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/OvalImageViewStyle" />
+
+    <TextView
+        android:id="@+id/artist_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:gravity="start|center_vertical"
+        android:maxLines="2"
+        android:paddingHorizontal="@dimen/generic_margin_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/artist_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/artist_iv"
+        app:layout_constraintTop_toTopOf="@+id/artist_iv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

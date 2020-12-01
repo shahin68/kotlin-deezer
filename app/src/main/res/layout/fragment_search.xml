@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    tools:context=".ui.fragments.search.SearchFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/search_card_view"
+        style="@style/CardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_view_height"
+        android:layout_marginHorizontal="@dimen/generic_margin_16dp"
+        android:layout_marginTop="@dimen/generic_margin_16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            style="@style/SearchViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search_placeholder_hint_search_for_artist" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:fadingEdgeLength="@dimen/generic_margin_16dp"
+        android:requiresFadingEdge="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_card_view"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_artist" />
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loading"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/generic_margin_16dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/search_card_view"
+        app:layout_constraintStart_toStartOf="@+id/search_card_view"
+        app:layout_constraintTop_toBottomOf="@+id/search_card_view" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="?attr/colorPrimaryVariant"
+        app:fabCustomSize="@dimen/search_fab_size"
+        android:layout_margin="@dimen/generic_margin_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_arrow_up"
+        app:tint="@color/white"
+        android:visibility="invisible"
+        app:maxImageSize="@dimen/generic_size_24dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

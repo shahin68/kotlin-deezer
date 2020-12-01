@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. By Shahin Montazeri (shahin.montazeri@gmail.com
+ */
+
 package com.shahin.deezer.di
 
 import com.shahin.deezer.data.sources.albums.AlbumsRepository

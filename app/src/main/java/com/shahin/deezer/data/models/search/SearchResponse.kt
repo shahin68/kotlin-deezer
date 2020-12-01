@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. By Shahin Montazeri (shahin.montazeri@gmail.com
+ */
+
 package com.shahin.deezer.data.models.search
 
 import android.os.Parcelable

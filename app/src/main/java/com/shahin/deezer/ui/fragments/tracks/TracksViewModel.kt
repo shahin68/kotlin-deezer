@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. By Shahin Montazeri (shahin.montazeri@gmail.com
+ */
+
 package com.shahin.deezer.ui.fragments.tracks
 
 import androidx.hilt.lifecycle.ViewModelInject

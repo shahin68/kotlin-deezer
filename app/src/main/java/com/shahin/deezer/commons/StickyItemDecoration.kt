@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2020. By Shahin Montazeri (shahin.montazeri@gmail.com
+ */
+
 package com.asan.amvlet.chat.ui.widget
 
 import android.graphics.Canvas

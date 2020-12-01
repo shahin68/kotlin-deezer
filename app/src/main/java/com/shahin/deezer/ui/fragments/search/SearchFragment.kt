@@ -20,7 +20,6 @@ import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
 import com.shahin.deezer.commons.MyLoadStateAdapter
 import com.shahin.deezer.data.models.artist.Artist
-import com.shahin.deezer.data.models.artist.ArtistShell
 import com.shahin.deezer.databinding.FragmentSearchBinding
 import com.shahin.deezer.extensions.hideKeyboard
 import com.shahin.deezer.extensions.textChanges

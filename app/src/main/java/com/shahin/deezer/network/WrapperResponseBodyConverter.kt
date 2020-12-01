@@ -7,7 +7,11 @@ package com.shahin.deezer.network
 import okhttp3.ResponseBody
 import retrofit2.Converter
 
-
+/**
+ * Response Body Wrapper
+ * Converting Any Response to
+ * @see WrapperResponse body type
+ */
 class WrapperResponseBodyConverter<T>(
     private val converter: Converter<ResponseBody, WrapperResponse<T>>
 ): Converter<ResponseBody, T> {

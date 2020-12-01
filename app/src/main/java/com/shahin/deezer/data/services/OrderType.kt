@@ -6,6 +6,9 @@ package com.shahin.deezer.data.services
 
 import androidx.annotation.Keep
 
+/**
+ * Deezer Order Queries
+ */
 @Keep
 enum class OrderType {
     RANKING,

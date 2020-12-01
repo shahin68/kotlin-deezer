@@ -12,6 +12,10 @@ import com.shahin.deezer.data.sources.tracks.remote.TracksRemoteSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+/**
+ * Artists Main Repository
+ * Providing access to All Data regarding Artists
+ */
 class TracksRepositoryImpl @Inject constructor(
     private val tracksLocalSource: TracksLocalSource,
     private val tracksRemoteSource: TracksRemoteSource

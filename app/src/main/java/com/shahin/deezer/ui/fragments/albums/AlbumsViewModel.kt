@@ -19,6 +19,9 @@ class AlbumsViewModel @ViewModelInject constructor(
 
     private var currentQueryValue: String? = null
 
+    /**
+     * keep Albums alive in viewmodel until it's changed
+     */
     private var currentSearchResult: Flow<PagingData<Album>>? = null
 
     fun fetchAlbums(artistId: String): Flow<PagingData<Album>> {

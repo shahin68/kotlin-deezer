@@ -12,6 +12,10 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ *
+ * Tracks api providing GET call to tracks of an album
+ */
 interface TracksApi {
 
     @GET("album/{id}/tracks")

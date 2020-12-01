@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shahin.deezer.R
 import com.shahin.deezer.databinding.ItemLoadStateBinding
 
+/**
+ * Standard view holder for displaying a loading state with paging adapter footer or header
+ */
 class MyLoadStateAdapter :
     LoadStateAdapter<MyLoadStateAdapter.LoadStateViewHolder>() {
 

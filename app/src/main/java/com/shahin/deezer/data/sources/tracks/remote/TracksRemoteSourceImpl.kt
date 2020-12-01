@@ -14,6 +14,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Tracks Remote Source providing access to
+ * @see TracksPagingDataSource
+ */
 class TracksRemoteSourceImpl @Inject constructor(
     private val tracksApi: TracksApi
 ): TracksRemoteSource {

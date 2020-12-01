@@ -11,6 +11,10 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 
+/**
+ * Local Module
+ * Providing Local Repository Interfaces
+ */
 @Module
 @InstallIn(ApplicationComponent::class)
 abstract class LocalModule {

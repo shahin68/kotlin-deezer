@@ -21,7 +21,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-
+/**
+ * Main Network Module
+ * Responsible for creating and providing Networking
+ * Proving OkHttp, ConverterFactory, Interceptors and Other Configurations
+ */
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {

@@ -15,6 +15,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 
+/**
+ * Module for binding Album repositories
+ */
 @Module
 @InstallIn(ApplicationComponent::class)
 abstract class AlbumsModule {

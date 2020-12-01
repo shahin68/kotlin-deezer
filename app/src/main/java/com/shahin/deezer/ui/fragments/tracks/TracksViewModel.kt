@@ -20,6 +20,9 @@ class TracksViewModel @ViewModelInject constructor(
 
     private var currentQueryValue: String? = null
 
+    /**
+     * keep tracks alive in viewmodel until it's changed
+     */
     private var currentSearchResult: Flow<PagingData<TrackShell>>? = null
 
     fun fetchTracks(albumId: String): Flow<PagingData<TrackShell>> {

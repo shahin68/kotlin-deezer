@@ -12,6 +12,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * Item decoration providing Sticky Header Behaviour to Any Recyclerview
+ */
 class StickyItemDecoration(
     parent: RecyclerView,
     private val shouldFadeOutHeader: Boolean = false,
@@ -47,10 +50,9 @@ class StickyItemDecoration(
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(c, parent, state)
-        //val topChild = parent.getChildAt(0) ?: return
         val topChild = parent.findChildViewUnder(
             parent.paddingLeft.toFloat(),
-            parent.paddingTop.toFloat() /*+ (currentHeader?.second?.itemView?.height ?: 0 )*/
+            parent.paddingTop.toFloat()
         ) ?: return
         val topChildPosition = parent.getChildAdapterPosition(topChild)
         if (topChildPosition == RecyclerView.NO_POSITION) {

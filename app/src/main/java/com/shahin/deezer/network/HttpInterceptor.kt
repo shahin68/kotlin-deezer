@@ -11,6 +11,10 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Network Interceptor
+ * Purpose: Provide Headers for all api calls
+ */
 class HttpInterceptor @Inject constructor(
     private val localDataSource: LocalDataSource
 ) : Interceptor {

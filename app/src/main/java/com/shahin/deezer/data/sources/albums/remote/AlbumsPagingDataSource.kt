@@ -10,6 +10,9 @@ import com.shahin.deezer.data.services.AlbumsApi
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Paging Data Source for Albums
+ */
 class AlbumsPagingDataSource(
     private val service: AlbumsApi,
     private val artistId: String
@@ -28,6 +31,9 @@ class AlbumsPagingDataSource(
         val apiQuery = artistId
         return try {
 
+            /**
+             * find if we have the id from last api calls
+             */
             val oldQuery = queryCache.find {
                 apiQuery.equals(it, true)
             }
@@ -49,8 +55,14 @@ class AlbumsPagingDataSource(
                 val results = response.body()!!.data
 
 
+                /**
+                 * keep the new query
+                 */
                 queryCache.add(apiQuery)
 
+                /**
+                 * keep the results
+                 */
                 inMemoryCache.addAll(
                     results
                 )
@@ -67,6 +79,9 @@ class AlbumsPagingDataSource(
         }
     }
 
+    /**
+     * validate results based on Artist ID
+     */
     private fun resultsValidatedAndSorted(artistId: String?): List<Album> {
         return inMemoryCache.filter {
             it.artist?.id.equals(artistId, false)

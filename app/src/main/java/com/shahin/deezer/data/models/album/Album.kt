@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName
 import com.shahin.deezer.data.models.artist.Artist
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Actual Album Model we care about
+ */
 @Parcelize
 data class Album(
 

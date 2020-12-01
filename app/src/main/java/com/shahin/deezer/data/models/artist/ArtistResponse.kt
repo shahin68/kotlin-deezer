@@ -8,6 +8,11 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Artist response Envelope
+ * @param total was needed in
+ * @see ArtistsPagingDataSource
+ */
 @Parcelize
 data class ArtistResponse(
 

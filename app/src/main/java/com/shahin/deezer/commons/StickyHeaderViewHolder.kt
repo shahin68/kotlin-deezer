@@ -11,6 +11,9 @@ import androidx.core.view.isVisible
 import com.shahin.deezer.R
 import com.shahin.deezer.extensions.visibleOrGone
 
+/**
+ * Our custom Sticky Header view holder
+ */
 class StickyHeaderViewHolder(itemView: View) : BindingViewHolder(itemView) {
     private val container = itemView.findViewById<LinearLayout>(R.id.header_container)
     private val tv = itemView.findViewById<TextView>(R.id.header_title)

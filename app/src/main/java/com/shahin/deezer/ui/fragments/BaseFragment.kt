@@ -8,6 +8,13 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
+/**
+ * Base Fragment
+ * Providing Binding
+ *
+ * CAUTION: Do not use any views after
+ * @see onDetach is called
+ */
 abstract class BaseFragment<Binding : ViewBinding>(@LayoutRes contentLayoutId: Int) : Fragment(contentLayoutId) {
     protected var _binding : Binding? = null
     protected  val binding : Binding get() = _binding!!

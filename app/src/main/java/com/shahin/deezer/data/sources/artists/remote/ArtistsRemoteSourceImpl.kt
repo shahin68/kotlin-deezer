@@ -13,6 +13,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Artists Remote Source providing access to
+ * @see ArtistsPagingDataSource
+ */
 class ArtistsRemoteSourceImpl @Inject constructor(
     private val service: ArtistsApi,
 ) : ArtistsRemoteSource {

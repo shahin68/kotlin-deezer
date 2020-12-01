@@ -13,6 +13,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import retrofit2.Retrofit
 
+/**
+ * Main App Module
+ * Providing Main functionality for the program
+ */
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {

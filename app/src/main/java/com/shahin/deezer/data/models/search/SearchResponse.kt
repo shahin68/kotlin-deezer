@@ -8,6 +8,9 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * General Search Envelope
+ */
 @Parcelize
 data class SearchResponse(
 

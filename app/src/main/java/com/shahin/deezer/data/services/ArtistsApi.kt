@@ -14,6 +14,11 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * Artists Api Interface providing
+ * @see generalSearch General Search
+ * @see queryForArtists Artist Search
+ */
 interface ArtistsApi {
 
     @GET("search")

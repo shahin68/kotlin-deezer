@@ -17,6 +17,10 @@ import kotlinx.coroutines.flow.callbackFlow
 import reactivecircus.flowbinding.common.checkMainThread
 import reactivecircus.flowbinding.common.safeOffer
 
+/**
+ * Extension loading Images using COIL with
+ * Network Image Uri
+ */
 fun AppCompatImageView.loadImage(uri: String?) {
     this.load(uri) {
         placeholder(R.drawable.ic_placeholder)
@@ -24,6 +28,10 @@ fun AppCompatImageView.loadImage(uri: String?) {
     }
 }
 
+/**
+ * Extension loading images using COIL
+ * Only for Local Resources
+ */
 fun AppCompatImageView.loadImage(@DrawableRes resId: Int) {
     this.load(resId) {
         placeholder(R.drawable.ic_placeholder)
@@ -31,6 +39,11 @@ fun AppCompatImageView.loadImage(@DrawableRes resId: Int) {
     }
 }
 
+/**
+ * Extension providing Text Watcher to Search View
+ * It's used in
+ * @see SearchFragment to implement searching flow
+ */
 @OptIn(ExperimentalCoroutinesApi::class)
 fun SearchView.textChanges(): Flow<String> =
     callbackFlow {

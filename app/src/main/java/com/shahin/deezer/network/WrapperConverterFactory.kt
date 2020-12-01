@@ -12,6 +12,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
+/**
+ * Standard Converter Factory
+ */
 class WrapperConverterFactory(
     private val factory: GsonConverterFactory
 ): Converter.Factory() {

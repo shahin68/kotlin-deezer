@@ -10,6 +10,9 @@ import com.shahin.deezer.data.services.TracksApi
 import retrofit2.HttpException
 import java.io.IOException
 
+/**
+ * Tracks Paging Source
+ */
 class TracksPagingDataSource(
     private val service: TracksApi,
     private val albumId: String
@@ -28,7 +31,9 @@ class TracksPagingDataSource(
         val position = params.key ?: startPage
         val apiQuery = albumId
         return try {
-
+            /**
+             * Look if we have the query
+             */
             val oldQuery = queryCache.find {
                 apiQuery.equals(it, true)
             }
@@ -51,8 +56,14 @@ class TracksPagingDataSource(
 
                 val shelled = results.map { TrackShell(it, apiQuery) }
 
+                /**
+                 * keep the query
+                 */
                 queryCache.add(apiQuery)
 
+                /**
+                 * keep the results
+                 */
                 inMemoryCache.addAll(
                     shelled
                 )
@@ -70,6 +81,11 @@ class TracksPagingDataSource(
         }
     }
 
+    /**
+     * validate TrackShells based on their AlbumID
+     * @param albumId was so needed here
+     * and this is the main cause of creating TrackShell in the first place
+     */
     private fun resultsValidatedAndSorted(albumId: String?): List<TrackShell> {
         return inMemoryCache.filter {
             it.albumId.equals(albumId, false)

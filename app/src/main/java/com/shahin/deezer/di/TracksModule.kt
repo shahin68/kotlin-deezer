@@ -15,6 +15,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 
+/**
+ * Module for binding Track repositories
+ */
 @Module
 @InstallIn(ApplicationComponent::class)
 abstract class TracksModule {

@@ -9,7 +9,6 @@ import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.shahin.deezer.data.models.artist.Artist
-import com.shahin.deezer.data.models.artist.ArtistShell
 import com.shahin.deezer.data.sources.artists.ArtistsRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -19,6 +18,9 @@ class SearchViewModel @ViewModelInject constructor(
 
     private var currentQueryValue: String? = null
 
+    /**
+     * keep Search Results alive in viewmodel until it's changed
+     */
     private var currentSearchResult: Flow<PagingData<Artist>>? = null
 
     fun search(queryString: String): Flow<PagingData<Artist>> {

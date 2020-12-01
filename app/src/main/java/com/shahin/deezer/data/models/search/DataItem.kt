@@ -10,6 +10,9 @@ import com.shahin.deezer.data.models.album.Album
 import com.shahin.deezer.data.models.artist.Artist
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * General Search Response Model
+ */
 @Parcelize
 data class DataItem(
 

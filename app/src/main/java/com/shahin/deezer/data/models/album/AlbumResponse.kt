@@ -8,6 +8,11 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Album Response Envelope
+ * @param total was needed in
+ * @see AlbumsPagingDataSource
+ */
 @Parcelize
 data class AlbumResponse(
 

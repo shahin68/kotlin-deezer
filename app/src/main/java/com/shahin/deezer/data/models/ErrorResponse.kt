@@ -8,6 +8,10 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * Error Response
+ * To be used for Error Handling with Non Paging Api calls
+ */
 @Parcelize
 data class ErrorResponse(
 
@@ -15,6 +19,9 @@ data class ErrorResponse(
 	val error: Error? = null
 ) : Parcelable
 
+/**
+ * Actual Deezer Error Model
+ */
 @Parcelize
 data class Error(
 

@@ -14,5 +14,5 @@ data class AlbumResponse(
 	val total: Int,
 
 	@field:SerializedName("data")
-	val data: List<Album?>
+	val data: List<Album>
 ) : Parcelable

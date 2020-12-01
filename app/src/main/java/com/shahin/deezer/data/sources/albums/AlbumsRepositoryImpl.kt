@@ -11,7 +11,7 @@ class AlbumsRepositoryImpl @Inject constructor(
     private val albumsLocalSource: AlbumsLocalSource,
     private val albumsRemoteSource: AlbumsRemoteSource
 ): AlbumsRepository {
-    override fun fetchAlbums(artistId: String?): Flow<PagingData<Album>> {
+    override fun fetchAlbums(artistId: String): Flow<PagingData<Album>> {
         return albumsRemoteSource.fetchAlbums(artistId)
     }
 

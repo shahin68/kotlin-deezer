@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface AlbumsRepository {
     fun fetchAlbums(
-        artistId: String?
+        artistId: String
     ): Flow<PagingData<Album>>
 }

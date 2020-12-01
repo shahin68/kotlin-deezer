@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.shahin.deezer.data.models.artist.Artist
+import com.shahin.deezer.data.models.artist.ArtistShell
 import com.shahin.deezer.data.sources.artists.ArtistsRepository
 import kotlinx.coroutines.flow.Flow
 

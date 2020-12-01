@@ -8,10 +8,10 @@ import kotlinx.android.parcel.Parcelize
 data class TracksResponse(
 
 	@field:SerializedName("total")
-	val total: Int? = null,
+	val total: Int,
 
 	@field:SerializedName("data")
-	val data: List<Track?>? = null
+	val data: List<Track>
 ) : Parcelable
 
 

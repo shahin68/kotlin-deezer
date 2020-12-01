@@ -14,7 +14,7 @@ data class ArtistResponse(
 	val total: Int,
 
 	@field:SerializedName("data")
-	val data: List<Artist?>,
+	val data: List<Artist>,
 
 	@field:SerializedName("prev")
 	val prev: String

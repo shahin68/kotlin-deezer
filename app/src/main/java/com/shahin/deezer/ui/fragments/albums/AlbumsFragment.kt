@@ -42,9 +42,8 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
-
         binding.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            onBackPressed()
         }
 
         setupList()
@@ -83,7 +82,7 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
 
     private fun fetchAlbums() {
         lifecycleScope.launch {
-            viewModel.fetchAlbums(args.artistId).collectLatest {
+            viewModel.fetchAlbums(args.artistId ?: "").collectLatest {
                 if (isAdded) {
                     binding.loading.isVisible = false
                     binding.messageTv.isVisible = false
@@ -104,5 +103,9 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
                 albumId = album.id
             )
         )
+    }
+
+    private fun onBackPressed() {
+        findNavController().popBackStack()
     }
 }

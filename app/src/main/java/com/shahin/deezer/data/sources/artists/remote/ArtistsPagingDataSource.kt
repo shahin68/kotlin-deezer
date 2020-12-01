@@ -1,17 +1,19 @@
 package com.shahin.deezer.data.sources.artists.remote
 
 import androidx.paging.PagingSource
-import com.shahin.deezer.data.services.ArtistsApi
 import com.shahin.deezer.data.models.artist.Artist
+import com.shahin.deezer.data.services.ArtistsApi
+import com.shahin.deezer.ui.fragments.search.adapter.ArtistsAdapter
 import retrofit2.HttpException
 import java.io.IOException
-
-private const val STARTING_PAGE_INDEX = 1
 
 class ArtistsPagingDataSource(
     private val service: ArtistsApi,
     private val query: String
 ) : PagingSource<Int, Artist>() {
+
+    private val startPage = 0
+    private val limit = 25
 
     companion object {
         private val inMemoryCache = mutableListOf<Artist>()
@@ -19,32 +21,44 @@ class ArtistsPagingDataSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Artist> {
-        val position = params.key ?: STARTING_PAGE_INDEX
+        val position = params.key ?: startPage
         val apiQuery = query
         return try {
-            val lastQuery = queryCache.find { it == apiQuery }
-            if (lastQuery == null) {
-                val response = service.queryForArtists(apiQuery, position, params.loadSize)
-                val results = response.body()!!
-                queryCache.add(apiQuery)
-                val lastIds = inMemoryCache.map { it.id }
-                inMemoryCache.addAll(
-                    results.filter { !lastIds.contains(it.id) }
-                )
-                val validResults = resultsValidatedAndSorted(query)
+            val oldQuery = queryCache.find {
+                apiQuery.equals(it, true)
+            }
+
+            if (oldQuery != null && position == startPage) {
+                val validatedResults = resultsValidatedAndSorted(apiQuery)
                 LoadResult.Page(
-                    data = validResults,
-                    prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
-                    nextKey = if (validResults.isEmpty()) null else position + 1
+                    data = validatedResults,
+                    prevKey = null,
+                    nextKey = null
                 )
             } else {
-                val validResults = resultsValidatedAndSorted(query)
+                val response = service.queryForArtists(
+                    artistName = apiQuery,
+                    page = position*limit,
+                    limit = limit
+                )
+                val body = response.body()!!
+                val results = response.body()!!.data
+
+
+
+                queryCache.add(apiQuery)
+
+                inMemoryCache.addAll(
+                    results
+                )
                 LoadResult.Page(
-                    data = validResults,
-                    prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
-                    nextKey = if (validResults.isEmpty()) null else position + 1
+                    data = if (position * limit <= body.total) results else emptyList(),
+                    prevKey = if (position == startPage) null else position - 1,
+                    nextKey = if (results.isEmpty() || position * limit > body.total) null else position + 1
                 )
             }
+
+
         } catch (exception: IOException) {
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
@@ -52,11 +66,11 @@ class ArtistsPagingDataSource(
         }
     }
 
+
     private fun resultsValidatedAndSorted(query: String): List<Artist> {
         return inMemoryCache.filter {
-            it.name.contains(query, true) ||
-                    (it.link.contains(query, true))
-        }.sortedWith(compareByDescending<Artist> { it.nbFan }.thenBy { it.name })
+            it.name?.contains(query, true) ?: false
+        }
     }
 
     override fun invalidate() {

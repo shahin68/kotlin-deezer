@@ -2,6 +2,7 @@ package com.shahin.deezer.data.services
 
 import com.shahin.deezer.data.models.album.Album
 import com.shahin.deezer.data.models.artist.Artist
+import com.shahin.deezer.data.models.artist.ArtistResponse
 import com.shahin.deezer.data.models.search.DataItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -17,6 +18,7 @@ interface ArtistsApi {
     )
     suspend fun generalSearch(
         @Query("q") artistName: String,
+        @Query("order") order: String = OrderType.RANKING.name,
         @Query("index") page: Int,
         @Query("limit") limit: Int = 25
     ): Response<List<DataItem>>
@@ -27,8 +29,9 @@ interface ArtistsApi {
     )
     suspend fun queryForArtists(
         @Query("q") artistName: String,
+        @Query("order") order: String = OrderType.RANKING.name,
         @Query("index") page: Int,
         @Query("limit") limit: Int = 25
-    ): Response<List<Artist>>
+    ): Response<ArtistResponse>
 
 }

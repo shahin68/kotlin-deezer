@@ -10,11 +10,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadState
+import androidx.paging.map
 import androidx.recyclerview.widget.RecyclerView
+import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
 import com.shahin.deezer.data.models.artist.Artist
+import com.shahin.deezer.data.models.artist.ArtistShell
 import com.shahin.deezer.databinding.FragmentSearchBinding
-import com.shahin.deezer.extensions.fastScrollUp
 import com.shahin.deezer.extensions.hideKeyboard
 import com.shahin.deezer.extensions.textChanges
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -51,12 +53,21 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         handleSearch()
 
         binding.fab.setOnClickListener {
-            binding.recyclerView.fastScrollUp()
+            binding.recyclerView.smoothScrollToPosition(0)
         }
     }
 
     private fun setupList() {
-        binding.recyclerView.adapter = searchAdapter
+        binding.recyclerView.apply {
+            adapter = searchAdapter
+            addItemDecoration(StickyItemDecoration(
+                parent = this,
+                shouldFadeOutHeader = false,
+                isHeader = { position ->
+                    searchAdapter.getItemViewType(position) == ArtistsAdapter.ViewTypes.Header.ordinal
+                }
+            ))
+        }
 
         binding.recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

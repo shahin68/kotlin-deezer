@@ -13,9 +13,19 @@ class AlbumsViewModel @ViewModelInject constructor(
     private val albumsRepository: AlbumsRepository
 ) : ViewModel() {
 
-    fun fetchAlbums(artistId: String?): Flow<PagingData<Album>> {
-        return albumsRepository.fetchAlbums(artistId)
-            .cachedIn(viewModelScope)
-    }
+    private var currentQueryValue: String? = null
 
+    private var currentSearchResult: Flow<PagingData<Album>>? = null
+
+    fun fetchAlbums(artistId: String): Flow<PagingData<Album>> {
+        val lastResult = currentSearchResult
+        if (artistId == currentQueryValue && lastResult != null) {
+            return lastResult
+        }
+        currentQueryValue = artistId
+        val newResult: Flow<PagingData<Album>> = albumsRepository.fetchAlbums(artistId)
+            .cachedIn(viewModelScope)
+        currentSearchResult = newResult
+        return newResult
+    }
 }

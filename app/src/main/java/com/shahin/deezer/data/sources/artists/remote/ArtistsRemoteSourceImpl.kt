@@ -3,9 +3,10 @@ package com.shahin.deezer.data.sources.artists.remote
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.shahin.deezer.data.services.ArtistsApi
 import com.shahin.deezer.data.models.artist.Artist
+import com.shahin.deezer.data.services.ArtistsApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ArtistsRemoteSourceImpl @Inject constructor(
@@ -24,7 +25,10 @@ class ArtistsRemoteSourceImpl @Inject constructor(
                     artistName
                 )
             }
-        ).flow
+        ).flow.map {
+            it.insertHeaderItem(
+                Artist()
+            )
+        }
     }
-
 }

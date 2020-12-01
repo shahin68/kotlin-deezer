@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
+import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
 import com.shahin.deezer.databinding.FragmentTracksBinding
 import com.shahin.deezer.extensions.loadImage
@@ -56,9 +57,19 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
 
     private fun setupList() {
         tracksAdapter = TracksAdapter {
-
+            // to do something with the track
         }
-        binding.recyclerView.adapter = tracksAdapter
+
+        binding.recyclerView.apply {
+            adapter = tracksAdapter
+            addItemDecoration(StickyItemDecoration(
+                parent = this,
+                shouldFadeOutHeader = false,
+                isHeader = { position ->
+                    tracksAdapter.getItemViewType(position) == TracksAdapter.ViewTypes.Header.ordinal
+                }
+            ))
+        }
 
         tracksAdapter.loadStateFlow.onEach { state ->
             if (isAdded) {
@@ -86,7 +97,7 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
 
     private fun fetchTracks() {
         lifecycleScope.launch {
-            viewModel.fetchTracks(args.albumId).collectLatest {
+            viewModel.fetchTracks(args.albumId ?: "").collectLatest {
                 if (isAdded) {
                     binding.loading.isVisible = false
                     binding.messageTv.isVisible = false

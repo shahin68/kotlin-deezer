@@ -1,15 +1,9 @@
 package com.shahin.deezer.extensions
 
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.DisplayMetrics
-import android.widget.TextView
+import android.view.View
 import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.shahin.deezer.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -39,7 +33,8 @@ fun SearchView.textChanges(): Flow<String> =
         checkMainThread()
         val listener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-//                safeOffer(query) // no need to submit anything
+                // no need to submit anything
+//                safeOffer(query)
                 return false
             }
 
@@ -52,18 +47,18 @@ fun SearchView.textChanges(): Flow<String> =
         awaitClose { setOnQueryTextListener(null) }
     }
 
-fun RecyclerView.fastScrollUp() {
-    val milliconds = 16
-    val smoothScroller = object : LinearSmoothScroller(context) {
-        override fun getVerticalSnapPreference(): Int {
-            return SNAP_TO_START
-        }
+fun View.visible() {
+    this.visibility = View.VISIBLE
+}
 
-        override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics?): Float {
-            return milliconds.toFloat() / (displayMetrics?.densityDpi ?: milliconds)
-        }
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+fun View.visibleOrGone(visible: Boolean) {
+    if (visible) {
+        this.visible()
+    } else {
+        this.gone()
     }
-
-    smoothScroller.targetPosition = 0
-    layoutManager?.startSmoothScroll(smoothScroller)
 }

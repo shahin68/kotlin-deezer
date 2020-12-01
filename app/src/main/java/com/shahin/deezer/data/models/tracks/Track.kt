@@ -8,71 +8,71 @@ import kotlinx.android.parcel.Parcelize
 data class Track(
 
     @field:SerializedName("readable")
-    val readable: Boolean,
+    val readable: Boolean? = null,
 
     @field:SerializedName("preview")
-    val preview: String,
+    val preview: String? = null,
 
     @field:SerializedName("md5_image")
-    val md5Image: String,
+    val md5Image: String? = null,
 
     @field:SerializedName("artist")
-    val artist: TracksArtist,
+    val artist: TracksArtist? = null,
 
     @field:SerializedName("link")
-    val link: String,
+    val link: String? = null,
 
     @field:SerializedName("explicit_content_cover")
-    val explicitContentCover: Int,
+    val explicitContentCover: Int? = null,
 
     @field:SerializedName("isrc")
-    val isrc: String,
+    val isrc: String? = null,
 
     @field:SerializedName("title")
-    val title: String,
+    val title: String? = null,
 
     @field:SerializedName("title_version")
-    val titleVersion: String,
+    val titleVersion: String? = null,
 
     @field:SerializedName("explicit_lyrics")
-    val explicitLyrics: Boolean,
+    val explicitLyrics: Boolean? = null,
 
     @field:SerializedName("type")
-    val type: String,
+    val type: String? = null,
 
     @field:SerializedName("title_short")
-    val titleShort: String,
+    val titleShort: String? = null,
 
     @field:SerializedName("duration")
-    val duration: String,
+    val duration: String? = null,
 
     @field:SerializedName("disk_number")
-    val diskNumber: Int,
+    val diskNumber: Int? = null,
 
     @field:SerializedName("rank")
-    val rank: String,
+    val rank: String? = null,
 
     @field:SerializedName("id")
-    val id: String,
+    val id: String? = null,
 
     @field:SerializedName("explicit_content_lyrics")
-    val explicitContentLyrics: Int,
+    val explicitContentLyrics: Int? = null,
 
     @field:SerializedName("track_position")
-    val trackPosition: Int
+    val trackPosition: Int? = null
 ) : Parcelable
 
 @Parcelize
 data class TracksArtist(
 
     @field:SerializedName("tracklist")
-    val tracklist: String,
+    val tracklist: String? = null,
 
     @field:SerializedName("name")
-    val name: String,
+    val name: String? = null,
 
     @field:SerializedName("id")
-    val id: String,
+    val id: String? = null,
 
     @field:SerializedName("type")
     val type: String

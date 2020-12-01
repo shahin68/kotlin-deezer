@@ -26,14 +26,12 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        converterFactory: Converter.Factory
+        // no need to use our factory anymore
+        /*converterFactory: Converter.Factory*/
     ): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BuildConfig.BASE_URL)
-            // converter order 1: it checks If custom converter works
-            .addConverterFactory(converterFactory)
-            // converter order 2: if order 1 fails, just do default converter
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

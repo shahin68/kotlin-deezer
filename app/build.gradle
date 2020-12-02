@@ -7,10 +7,10 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
-def versionMajor = 0 // major changes
+def versionMajor = 1 // major changes
 def versionMinor = 0 // minor changes
 def versionPatch = 0 // bug fixes & patches
-def versionBuild = 1 // build number
+def versionBuild = 0 // build number
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"

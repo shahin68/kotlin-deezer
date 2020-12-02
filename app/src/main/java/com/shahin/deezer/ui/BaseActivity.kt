@@ -4,6 +4,7 @@
 
 package com.shahin.deezer.ui
 
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -12,6 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
  * But So Useful
  * Not gonna remove it just in case
  */
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity(@LayoutRes layoutResource: Int) : AppCompatActivity(layoutResource) {
 
 }

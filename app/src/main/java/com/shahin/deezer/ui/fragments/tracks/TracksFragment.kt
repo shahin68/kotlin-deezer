@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
+import androidx.paging.map
 import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
 import com.shahin.deezer.commons.MyLoadStateAdapter
@@ -88,11 +89,11 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
 
     private fun fetchTracks() {
         lifecycleScope.launch {
-            viewModel.fetchTracks(args.albumId ?: "").collectLatest {
+            viewModel.fetchTracks(args.albumId ?: "").collectLatest { pagingData ->
                 if (isAdded) {
                     binding.loading.isVisible = false
                     if (::tracksAdapter.isInitialized) {
-                        tracksAdapter.submitData(it)
+                        tracksAdapter.submitData(pagingData.map { it.data })
                     }
                 }
             }

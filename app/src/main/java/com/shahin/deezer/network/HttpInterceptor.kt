@@ -21,9 +21,7 @@ class HttpInterceptor @Inject constructor(
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val token = localDataSource.getApiKey()
-        val url = chain.request().url.newBuilder()
-            .addQueryParameter("locale", Locale.getDefault().language)
-            .build()
+
         val request = chain.request()
         val requestBuilder = request.newBuilder()
 
@@ -44,6 +42,9 @@ class HttpInterceptor @Inject constructor(
          * that means we do Not want to fetch a localized response
          */
         if (request.header("No-Locality") == null) {
+            val url = chain.request().url.newBuilder()
+                .addQueryParameter("locale", Locale.getDefault().language)
+                .build()
             requestBuilder.url(url)
         } else {
             requestBuilder.removeHeader("No-Locality")

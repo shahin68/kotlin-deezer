@@ -6,6 +6,7 @@
 package com.shahin.deezer.data.sources.artists
 
 import androidx.paging.PagingData
+import com.shahin.deezer.data.models.ResponseData
 import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.data.sources.artists.local.ArtistsLocalSource
 import com.shahin.deezer.data.sources.artists.remote.ArtistsRemoteSource
@@ -20,7 +21,7 @@ class ArtistsRepositoryImpl @Inject constructor(
     private val artistsLocalSource: ArtistsLocalSource,
     private val artistsRemoteSource: ArtistsRemoteSource
 ) : ArtistsRepository {
-    override fun search(artistName: String): Flow<PagingData<Artist>> {
+    override fun search(artistName: String): Flow<PagingData<ResponseData<Artist>>> {
         return artistsRemoteSource.search(artistName)
     }
 

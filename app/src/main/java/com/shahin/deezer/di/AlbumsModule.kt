@@ -5,6 +5,9 @@
 
 package com.shahin.deezer.di
 
+import com.shahin.deezer.commons.paging.sources.PagingDataSource
+import com.shahin.deezer.commons.paging.sources.PagingDataSourceImpl
+import com.shahin.deezer.data.models.album.Album
 import com.shahin.deezer.data.sources.albums.AlbumsRepository
 import com.shahin.deezer.data.sources.albums.AlbumsRepositoryImpl
 import com.shahin.deezer.data.sources.albums.local.AlbumsLocalSource
@@ -36,4 +39,9 @@ abstract class AlbumsModule {
     abstract fun bindAlbumsRepository(
         albumsRepositoryImpl: AlbumsRepositoryImpl
     ): AlbumsRepository
+
+    @Binds
+    abstract fun makeAlbumsPagingSource(
+        pagingDataSourceImpl: PagingDataSourceImpl<Album>
+    ): PagingDataSource<Album>
 }

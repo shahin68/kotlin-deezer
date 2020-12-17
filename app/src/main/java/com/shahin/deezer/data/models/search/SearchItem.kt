@@ -15,7 +15,7 @@ import kotlinx.android.parcel.Parcelize
  * General Search Response Model
  */
 @Parcelize
-data class DataItem(
+data class SearchItem(
 
     @field:SerializedName("readable")
     val readable: Boolean? = null,

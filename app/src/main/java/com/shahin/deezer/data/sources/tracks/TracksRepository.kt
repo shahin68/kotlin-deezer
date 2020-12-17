@@ -6,12 +6,12 @@
 package com.shahin.deezer.data.sources.tracks
 
 import androidx.paging.PagingData
+import com.shahin.deezer.data.models.ResponseData
 import com.shahin.deezer.data.models.tracks.Track
-import com.shahin.deezer.data.models.tracks.TrackShell
 import kotlinx.coroutines.flow.Flow
 
 interface TracksRepository {
     fun fetchTracks(
         albumId: String
-    ): Flow<PagingData<TrackShell>>
+    ): Flow<PagingData<ResponseData<Track>>>
 }

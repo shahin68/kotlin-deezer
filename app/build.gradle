@@ -29,8 +29,8 @@ android {
         if (file("../secure.properties").exists()) {
             file("../secure.properties")?.withInputStream { secureProps.load(it) }
         }
-        buildConfigField "string", "BASE_URL", (secureProps.getProperty("BASE_URL") ?: "")
-        buildConfigField "string", "SECRET", (secureProps.getProperty("SECRET") ?: "")
+        buildConfigField "String", "BASE_URL", (secureProps.getProperty("BASE_URL") ?: "")
+        buildConfigField "String", "SECRET", (secureProps.getProperty("SECRET") ?: "")
     }
 
     buildTypes {

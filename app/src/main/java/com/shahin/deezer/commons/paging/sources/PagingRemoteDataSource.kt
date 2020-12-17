@@ -1,40 +1,35 @@
 /*
- * Copyright (c) 2020. By Shahin Montazeri (shahin.montazeri@gmail.com) 
+ * Copyright (c) 2020. By Shahin Montazeri (shahin.montazeri@gmail.com)
  * Programmed for demonstration purposes
  */
 
-package com.shahin.deezer.data.sources.tracks.remote
+package com.shahin.deezer.commons.paging.sources
 
 import androidx.paging.PagingSource
-import com.shahin.deezer.data.models.tracks.TrackShell
-import com.shahin.deezer.data.services.TracksApi
+import com.shahin.deezer.data.models.ResponseData
+import com.shahin.deezer.data.services.ServiceType
 import retrofit2.HttpException
 import java.io.IOException
 
-/**
- * Tracks Paging Source
- */
-class TracksPagingDataSource(
-    private val service: TracksApi,
-    private val albumId: String
-) : PagingSource<Int, TrackShell>() {
+class PagingRemoteDataSource<T>(
+    private val query: String,
+    private val serviceType: ServiceType,
+    private val pagingDataSource: PagingDataSource<T>
+) : PagingSource<Int, ResponseData<T>>() {
+
+    companion object {
+        private val inMemoryCache = mutableListOf<ResponseData<*>>() // (*) we don't care about the object type
+        private val queryCache = mutableListOf<String>()
+    }
 
     private val startPage = 0
     private val limit = 25
 
-    companion object {
-        private val inMemoryCache = mutableListOf<TrackShell>()
-        private val queryCache = mutableListOf<String>()
-    }
-
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TrackShell> {
-
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResponseData<T>> {
         val position = params.key ?: startPage
-        val apiQuery = albumId
+        val apiQuery = query
         return try {
-            /**
-             * Look if we have the query
-             */
+
             val oldQuery = queryCache.find {
                 apiQuery.equals(it, true)
             }
@@ -45,29 +40,20 @@ class TracksPagingDataSource(
                     data = validatedResults,
                     prevKey = null,
                     nextKey = null
-                )
+                ) as LoadResult<Int, ResponseData<T>>
             } else {
-                val response = service.queryForTracks(
-                    albumId = apiQuery,
-                    page = position*limit,
-                    limit = limit
-                )
+                val response = pagingDataSource.fetch(apiQuery, position*limit, limit, serviceType)
                 val body = response.body()!!
                 val results = response.body()!!.data
 
-                val shelled = results.map { TrackShell(it, apiQuery) }
-
-                /**
-                 * keep the query
-                 */
                 queryCache.add(apiQuery)
 
-                /**
-                 * keep the results
-                 */
+                val shelled = results.map { ResponseData<T>(query = apiQuery, data = it.data) }
+
                 inMemoryCache.addAll(
                     shelled
                 )
+
                 LoadResult.Page(
                     data = if (position * limit <= body.total) shelled else emptyList(),
                     prevKey = if (position == startPage) null else position - 1,
@@ -82,14 +68,9 @@ class TracksPagingDataSource(
         }
     }
 
-    /**
-     * validate TrackShells based on their AlbumID
-     * @param albumId was so needed here
-     * and this is the main cause of creating TrackShell in the first place
-     */
-    private fun resultsValidatedAndSorted(albumId: String?): List<TrackShell> {
+    private fun resultsValidatedAndSorted(query: String): List<ResponseData<*>> {
         return inMemoryCache.filter {
-            it.albumId.equals(albumId, true)
+            it.query.contains(query, true)
         }
     }
 

@@ -58,10 +58,17 @@ object NetworkModule {
             .build()
     }
 
+    /**
+     * making sure log interceptor only runs on debug mode - preventing production compromise
+     */
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        if (BuildConfig.DEBUG) {
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+            logging.setLevel(HttpLoggingInterceptor.Level.NONE)
+        }
         return logging
     }
 

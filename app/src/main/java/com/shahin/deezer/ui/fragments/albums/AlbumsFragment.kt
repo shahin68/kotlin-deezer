@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
+import androidx.paging.map
 import com.shahin.deezer.R
 import com.shahin.deezer.commons.MyLoadStateAdapter
 import com.shahin.deezer.data.models.album.Album
@@ -72,11 +73,11 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
 
     private fun fetchAlbums() {
         lifecycleScope.launch {
-            viewModel.fetchAlbums(args.artistId ?: "").collectLatest {
+            viewModel.fetchAlbums(args.artistId ?: "").collectLatest { pagingData ->
                 if (isAdded) {
                     binding.loading.isVisible = false
                     if (::albumsAdapter.isInitialized) {
-                        albumsAdapter.submitData(it)
+                        albumsAdapter.submitData(pagingData.map { it.data })
                     }
                 }
             }

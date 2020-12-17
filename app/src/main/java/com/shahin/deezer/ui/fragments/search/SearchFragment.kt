@@ -107,10 +107,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             .onEach {
                 searchJob?.cancel()
                 searchJob = lifecycleScope.launch {
-                    viewModel.search(it.trim()).collectLatest {
+                    viewModel.search(it.trim()).collectLatest { pagingData ->
                         if (isAdded) {
                             binding.loading.isVisible = false
-                            searchAdapter.submitData(it)
+                            searchAdapter.submitData(pagingData.map { it.data })
                         }
                     }
                 }

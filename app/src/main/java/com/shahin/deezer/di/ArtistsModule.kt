@@ -5,6 +5,9 @@
 
 package com.shahin.deezer.di
 
+import com.shahin.deezer.commons.paging.sources.PagingDataSource
+import com.shahin.deezer.commons.paging.sources.PagingDataSourceImpl
+import com.shahin.deezer.data.models.artist.Artist
 import com.shahin.deezer.data.sources.artists.ArtistsRepository
 import com.shahin.deezer.data.sources.artists.ArtistsRepositoryImpl
 import com.shahin.deezer.data.sources.artists.local.ArtistsLocalSource
@@ -36,4 +39,9 @@ abstract class ArtistsModule {
     abstract fun bindArtistsRepository(
         artistsRepositoryImpl: ArtistsRepositoryImpl
     ): ArtistsRepository
+
+    @Binds
+    abstract fun makeArtistsPagingSource(
+        artistPagingDataSourceImpl: PagingDataSourceImpl<Artist>
+    ): PagingDataSource<Artist>
 }

@@ -14,21 +14,20 @@ import com.shahin.deezer.R
 import com.shahin.deezer.commons.BindingViewHolder
 import com.shahin.deezer.commons.StickyHeaderViewHolder
 import com.shahin.deezer.data.models.tracks.Track
-import com.shahin.deezer.data.models.tracks.TrackShell
 import com.shahin.deezer.databinding.ItemTrackBinding
 import com.shahin.deezer.extensions.inflate
 
 class TracksAdapter(
     private val block: (Track) -> Unit
-) : PagingDataAdapter<TrackShell, BindingViewHolder>(DIFF_COMPARATOR) {
+) : PagingDataAdapter<Track, BindingViewHolder>(DIFF_COMPARATOR) {
 
     companion object {
-        val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<TrackShell>() {
-            override fun areItemsTheSame(oldItem: TrackShell, newItem: TrackShell): Boolean {
-                return oldItem.track.id == newItem.track.id
+        val DIFF_COMPARATOR = object : DiffUtil.ItemCallback<Track>() {
+            override fun areItemsTheSame(oldItem: Track, newItem: Track): Boolean {
+                return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: TrackShell, newItem: TrackShell): Boolean {
+            override fun areContentsTheSame(oldItem: Track, newItem: Track): Boolean {
                 return oldItem == newItem
             }
         }
@@ -68,14 +67,14 @@ class TracksAdapter(
         when (holder) {
             is TrackViewHolder -> {
                 if (item != null) {
-                    holder.bind(item.track)
+                    holder.bind(item)
                 } else {
                     holder.clear()
                 }
             }
             is StickyHeaderViewHolder -> {
                 if (item != null) {
-                    holder.bind(item.track.titleVersion, showDivider = true)
+                    holder.bind(item.titleVersion, showDivider = true)
                 }
             }
         }

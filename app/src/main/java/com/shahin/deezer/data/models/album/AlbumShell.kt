@@ -15,7 +15,7 @@ import androidx.annotation.Keep
  *
  */
 @Keep
-class AlbumShell(
+data class AlbumShell(
     val album: Album,
     val artistId: String
 )

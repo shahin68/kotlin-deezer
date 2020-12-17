@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6c7e8dae10ef61d051a4ad8e7b7cd4a8/jetified-flowbinding-common-0.10.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6c7e8dae10ef61d051a4ad8e7b7cd4a8/jetified-flowbinding-common-0.10.2/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6c7e8dae10ef61d051a4ad8e7b7cd4a8/jetified-flowbinding-common-0.10.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/572cbc124f2f3e187da0ddcc3ee93b5d/jetified-flowbinding-common-0.10.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/572cbc124f2f3e187da0ddcc3ee93b5d/jetified-flowbinding-common-0.10.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/572cbc124f2f3e187da0ddcc3ee93b5d/jetified-flowbinding-common-0.10.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.github.reactivecircus.flowbinding/flowbinding-common/0.10.2/3e570940d985d22ac6dd5c8b8fb5f1210aed1a88/flowbinding-common-0.10.2-javadoc.jar!/" />

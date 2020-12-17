@@ -25,8 +25,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
-        buildConfigField "String", "BASE_URL", "\"https://api.deezer.com/\""
-        buildConfigField "String", "SECRET", "\"5e2cafdc06b9ef27656bf10691f66ebc\""
+        def secureProps = new Properties()
+        if (file("../secure.properties").exists()) {
+            file("../secure.properties")?.withInputStream { secureProps.load(it) }
+        }
+        buildConfigField "string", "BASE_URL", (secureProps.getProperty("BASE_URL") ?: "")
+        buildConfigField "string", "SECRET", (secureProps.getProperty("SECRET") ?: "")
     }
 
     buildTypes {
@@ -56,8 +60,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -89,7 +93,7 @@ dependencies {
     implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1')
 
     // Paging Library
-    implementation('androidx.paging:paging-runtime-ktx:3.0.0-alpha09')
+    implementation('androidx.paging:paging-runtime-ktx:3.0.0-alpha10')
 
     // Coil Image Loading Library
     implementation('io.coil-kt:coil:1.1.0')

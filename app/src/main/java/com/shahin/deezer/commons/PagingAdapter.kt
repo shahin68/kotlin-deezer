@@ -3,7 +3,7 @@
  * Programmed for demonstration purposes
  */
 
-package com.shahin.deezer.commons.paging.adapter
+package com.shahin.deezer.commons
 
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil

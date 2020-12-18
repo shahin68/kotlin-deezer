@@ -5,8 +5,8 @@
 
 package com.shahin.deezer.di
 
-import com.shahin.deezer.data.sources.localsource.LocalDataSource
-import com.shahin.deezer.data.sources.localsource.LocalDataSourceImp
+import com.shahin.deezer.data.sources.local.LocalDataSource
+import com.shahin.deezer.data.sources.local.LocalDataSourceImp
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

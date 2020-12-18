@@ -5,7 +5,11 @@
 
 package com.shahin.deezer.data.models
 
-data class ResponseData<T>(
+import android.os.Parcelable
+import androidx.annotation.Keep
+
+@Keep
+data class ResponseData(
     val query: String,
-    val data: T
+    val data: Any
 )

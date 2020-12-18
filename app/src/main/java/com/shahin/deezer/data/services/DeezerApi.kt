@@ -18,7 +18,7 @@ import retrofit2.http.Query
 
 interface DeezerApi {
 
-    @GET("search")
+    /*@GET("search")
     @Headers(
         "No-Locality: true"
     )
@@ -27,7 +27,7 @@ interface DeezerApi {
         @Query("order") order: String = OrderType.RANKING.name,
         @Query("index") page: Int,
         @Query("limit") limit: Int = 25
-    ): Response<List<SearchItem>>
+    ): Response<ResponseModel<SearchItem>>*/
 
     @GET("artist/{id}/albums")
     @Headers(

@@ -19,5 +19,5 @@ data class ResponseModel<T>(
     val total: Int,
 
     @SerializedName("data")
-    val data: List<ResponseData<T>>
+    val data: List<T>
 )

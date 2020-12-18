@@ -12,11 +12,12 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.shahin.deezer.data.models.ResponseData
 import com.shahin.deezer.data.models.album.Album
-import com.shahin.deezer.data.sources.albums.AlbumsRepository
+import com.shahin.deezer.data.services.ServiceType
+import com.shahin.deezer.data.sources.remote.Repository
 import kotlinx.coroutines.flow.Flow
 
 class AlbumsViewModel @ViewModelInject constructor(
-    private val albumsRepository: AlbumsRepository
+    private val repository: Repository
 ) : ViewModel() {
 
     private var currentQueryValue: String? = null
@@ -24,15 +25,15 @@ class AlbumsViewModel @ViewModelInject constructor(
     /**
      * keep Albums alive in viewmodel until it's changed
      */
-    private var currentSearchResult: Flow<PagingData<ResponseData<Album>>>? = null
+    private var currentSearchResult: Flow<PagingData<ResponseData>>? = null
 
-    fun fetchAlbums(artistId: String): Flow<PagingData<ResponseData<Album>>> {
+    fun fetchAlbums(artistId: String): Flow<PagingData<ResponseData>> {
         val lastResult = currentSearchResult
         if (artistId == currentQueryValue && lastResult != null) {
             return lastResult
         }
         currentQueryValue = artistId
-        val newResult: Flow<PagingData<ResponseData<Album>>> = albumsRepository.fetchAlbums(artistId)
+        val newResult: Flow<PagingData<ResponseData>> = repository.fetch(artistId, ServiceType.Albums)
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult

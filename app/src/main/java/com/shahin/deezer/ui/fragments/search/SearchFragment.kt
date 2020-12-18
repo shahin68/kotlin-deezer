@@ -110,7 +110,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     viewModel.search(it.trim()).collectLatest { pagingData ->
                         if (isAdded) {
                             binding.loading.isVisible = false
-                            searchAdapter.submitData(pagingData.map { it.data })
+                            searchAdapter.submitData(pagingData.map { it.data as Artist })
                         }
                     }
                 }

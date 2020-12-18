@@ -26,4 +26,5 @@ object AppModule {
     ): DeezerApi {
         return retrofit.create(DeezerApi::class.java)
     }
+
 }

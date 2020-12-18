@@ -20,6 +20,8 @@ import androidx.paging.map
 import com.asan.amvlet.chat.ui.widget.StickyItemDecoration
 import com.shahin.deezer.R
 import com.shahin.deezer.commons.MyLoadStateAdapter
+import com.shahin.deezer.data.models.artist.Artist
+import com.shahin.deezer.data.models.tracks.Track
 import com.shahin.deezer.databinding.FragmentTracksBinding
 import com.shahin.deezer.extensions.loadImage
 import com.shahin.deezer.ui.fragments.BaseFragment
@@ -93,7 +95,7 @@ class TracksFragment : BaseFragment<FragmentTracksBinding>(R.layout.fragment_tra
                 if (isAdded) {
                     binding.loading.isVisible = false
                     if (::tracksAdapter.isInitialized) {
-                        tracksAdapter.submitData(pagingData.map { it.data })
+                        tracksAdapter.submitData(pagingData.map { it.data as Track })
                     }
                 }
             }

@@ -9,7 +9,7 @@ import com.shahin.deezer.network.HttpInterceptor
 import com.shahin.deezer.network.WrapperConverterFactory
 import com.google.gson.GsonBuilder
 import com.shahin.deezer.BuildConfig
-import com.shahin.deezer.data.sources.localsource.LocalDataSource
+import com.shahin.deezer.data.sources.local.LocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

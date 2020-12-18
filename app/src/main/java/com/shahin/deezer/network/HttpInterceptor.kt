@@ -5,7 +5,7 @@
 
 package com.shahin.deezer.network
 
-import com.shahin.deezer.data.sources.localsource.LocalDataSource
+import com.shahin.deezer.data.sources.local.LocalDataSource
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException

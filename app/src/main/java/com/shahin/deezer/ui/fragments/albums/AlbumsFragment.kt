@@ -77,7 +77,7 @@ class AlbumsFragment : BaseFragment<FragmentAlbumsBinding>(R.layout.fragment_alb
                 if (isAdded) {
                     binding.loading.isVisible = false
                     if (::albumsAdapter.isInitialized) {
-                        albumsAdapter.submitData(pagingData.map { it.data })
+                        albumsAdapter.submitData(pagingData.map { it.data as Album })
                     }
                 }
             }

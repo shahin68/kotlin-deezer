@@ -8,7 +8,7 @@ plugins {
 }
 
 def versionMajor = 1 // major changes
-def versionMinor = 0 // minor changes
+def versionMinor = 1 // minor changes
 def versionPatch = 0 // bug fixes & patches
 def versionBuild = 0 // build number
 android {
